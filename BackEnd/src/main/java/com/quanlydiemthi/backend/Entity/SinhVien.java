@@ -15,7 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name="sinh_vien")
 public class SinhVien {
     @Id
     private Integer maSV;

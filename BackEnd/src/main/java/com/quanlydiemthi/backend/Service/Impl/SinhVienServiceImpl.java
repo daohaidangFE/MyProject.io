@@ -2,6 +2,7 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 
 import com.quanlydiemthi.backend.Entity.SinhVien;
+import com.quanlydiemthi.backend.Exceptions.NotFoundException;
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Repository.SinhVienRepository;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
@@ -26,6 +27,24 @@ public class SinhVienServiceImpl implements ISinhVienService {
         return accounts.stream()
                 .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public SinhVienDTO findSinhVienById(Integer Id) {
+        SinhVien sinhvien = sinhvienRepository.findById(Id).orElseThrow(()->new NotFoundException("SinhVien", "Id", Id));
+        return modelMapper.map(sinhvien, SinhVienDTO.class);
+    }
+
+    @Override
+    public List<SinhVienDTO> searchByFullname(String tenSV) {
+        return sinhvienRepository.findAllByTenSVContainingIgnoreCase(tenSV).stream()
+                .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
+                .toList();
+    }
+
+    @Override
+    public void deleteSinhVienById(Integer Id) {
+        sinhvienRepository.deleteById(Id);
     }
 
 }
