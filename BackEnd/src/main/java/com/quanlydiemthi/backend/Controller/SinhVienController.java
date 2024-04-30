@@ -19,7 +19,7 @@ public class SinhVienController {
     @GetMapping("/api/sinhvien")
     public ResponseEntity<?> getAllSinhVien() {
         List<SinhVienDTO> sinhVienDTOList = sinhVienService.findAll();
-        sinhVienDTOList.forEach(System.out::println);
+//        sinhVienDTOList.forEach(System.out::println); đánh debug
         return ResponseEntity.ok(sinhVienDTOList);
     }
 
@@ -36,7 +36,7 @@ public class SinhVienController {
     @DeleteMapping("/api/sinhvien/{id}")
     public ResponseEntity<?> deleteSinhVienById(@PathVariable int id) {
         sinhVienService.deleteSinhVienById(id);
-        return new ResponseEntity<>(new ApiResponse<>("SinhVien was deleted sucessfully", true), HttpStatus.OK);
+        return new ResponseEntity<>(new ApiResponse<>("Sinh vien was deleted sucessfully", true), HttpStatus.OK);
     }
 
 }

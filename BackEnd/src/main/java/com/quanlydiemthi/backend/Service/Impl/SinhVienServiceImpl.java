@@ -23,8 +23,8 @@ public class SinhVienServiceImpl implements ISinhVienService {
 
     @Override
     public List<SinhVienDTO> findAll() {
-        List<SinhVien> accounts = sinhvienRepository.findAll();
-        return accounts.stream()
+        List<SinhVien> sinhVien = sinhvienRepository.findAll();
+        return sinhVien.stream()
                 .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
                 .collect(Collectors.toList());
     }
@@ -39,7 +39,7 @@ public class SinhVienServiceImpl implements ISinhVienService {
     public List<SinhVienDTO> searchByFullname(String tenSV) {
         return sinhvienRepository.findAllByTenSVContainingIgnoreCase(tenSV).stream()
                 .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
