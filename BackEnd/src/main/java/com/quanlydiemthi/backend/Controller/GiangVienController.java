@@ -34,7 +34,7 @@ public class GiangVienController {
 
     @GetMapping("/api/giangvien/searchbyname")
     public ResponseEntity<?> searchGiangVienByFullname(@RequestParam String searchValue) {
-        List<GiangVienDTO> giangVienDTOList = giangVienService.searchByFullname(searchValue);
+        List<GiangVienDTO> giangVienDTOList = giangVienService.searchByFullname(searchValue.replaceAll("\s\s+", " ").trim());
         return ResponseEntity.ok(giangVienDTOList);
     }
 

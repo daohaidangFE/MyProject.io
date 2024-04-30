@@ -30,7 +30,7 @@ public class SinhVienController {
 
     @GetMapping("/api/sinhvien/searchbyname")
     public ResponseEntity<?> searchSinhVienByFullname(@RequestParam String searchValue) {
-        return ResponseEntity.ok(sinhVienService.searchByFullname(searchValue));
+        return ResponseEntity.ok(sinhVienService.searchByFullname(searchValue.replaceAll("\s\s+", " ").trim()));
     }
 
     @GetMapping("/api/sinhvien/searchbysex")
