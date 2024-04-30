@@ -10,4 +10,5 @@ public interface IGiangVienService {
     GiangVienDTO findGiangVienById(Integer id);
     void deleteGiangVienById(Integer id);
     List<GiangVienDTO> searchByFullname(String tenGV);
+    List<GiangVienDTO> searchByGioiTinh(String gioiTinh);
 }

@@ -28,9 +28,14 @@ public class SinhVienController {
         return  ResponseEntity.ok(sinhVienService.findSinhVienById(id));
     }
 
-    @GetMapping("api/sinhvien/search")
-    public ResponseEntity<?> searchSinhVien(@RequestParam String searchValue) {
+    @GetMapping("/api/sinhvien/searchbyname")
+    public ResponseEntity<?> searchSinhVienByFullname(@RequestParam String searchValue) {
         return ResponseEntity.ok(sinhVienService.searchByFullname(searchValue));
+    }
+
+    @GetMapping("/api/sinhvien/searchbysex")
+    public ResponseEntity<?> searchSinhVienByGioiTinh(@RequestParam String searchValue) {
+        return ResponseEntity.ok(sinhVienService.searchByGioiTinh(searchValue));
     }
 
     @DeleteMapping("/api/sinhvien/{id}")

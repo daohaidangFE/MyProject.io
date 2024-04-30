@@ -43,6 +43,14 @@ public class SinhVienServiceImpl implements ISinhVienService {
     }
 
     @Override
+    public List<SinhVienDTO> searchByGioiTinh(String gioiTinh) {
+        List<SinhVien> sinhVienList = sinhvienRepository.findAllByGioiTinhContainingIgnoreCase(gioiTinh);
+        return sinhVienList.stream()
+                .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
+                .collect((Collectors.toList()));
+    }
+
+    @Override
     public void deleteSinhVienById(Integer Id) {
         sinhvienRepository.deleteById(Id);
     }

@@ -43,6 +43,14 @@ public class GiangVienServiceImpl implements IGiangVienService {
     }
 
     @Override
+    public List<GiangVienDTO> searchByGioiTinh(String gioiTinh) {
+        List<GiangVien> giangVienList = giangVienRepository.findGiangVienByGioiTinhContainingIgnoreCase(gioiTinh);
+        return giangVienList.stream()
+                .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteGiangVienById(Integer Id) {
         giangVienRepository.deleteById(Id);
     }

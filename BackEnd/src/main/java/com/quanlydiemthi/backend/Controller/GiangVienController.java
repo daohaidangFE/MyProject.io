@@ -26,19 +26,25 @@ public class GiangVienController {
         return ResponseEntity.ok(giangVienDTOList);
     }
 
-    @GetMapping("api/giangvien/{id}")
+    @GetMapping("/api/giangvien/{id}")
     public ResponseEntity<?> getGiangVienById(@PathVariable Integer id) {
         GiangVienDTO giangVienDTO = giangVienService.findGiangVienById(id);
         return ResponseEntity.ok(giangVienDTO);
     }
 
-    @GetMapping("api/giangvien/search")
-    public ResponseEntity<?> searchGiangVien(@RequestParam String searchValue) {
+    @GetMapping("/api/giangvien/searchbyname")
+    public ResponseEntity<?> searchGiangVienByFullname(@RequestParam String searchValue) {
         List<GiangVienDTO> giangVienDTOList = giangVienService.searchByFullname(searchValue);
         return ResponseEntity.ok(giangVienDTOList);
     }
 
-    @DeleteMapping("api/giangvien/{id}")
+    @GetMapping("/api/giangvien/searchbysex")
+    public ResponseEntity<?> searchGiangVienByGioitinh(@RequestParam String searchValue) {
+        List<GiangVienDTO> giangVienDTOList = giangVienService.searchByGioiTinh(searchValue);
+        return ResponseEntity.ok(giangVienDTOList);
+    }
+
+    @DeleteMapping("/api/giangvien/{id}")
     public ResponseEntity<?> deleteGiangVien(@PathVariable Integer id) {
         giangVienService.deleteGiangVienById(id);
         return new ResponseEntity<>(new ApiResponse<>("Giang vien was deleted sucessfull", true), HttpStatus.OK);

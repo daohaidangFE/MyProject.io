@@ -9,4 +9,5 @@ public interface ISinhVienService {
     SinhVienDTO findSinhVienById(Integer Id);
     void deleteSinhVienById(Integer Id);
     List<SinhVienDTO> searchByFullname(String tenSV);
+    List<SinhVienDTO> searchByGioiTinh(String gioiTinh);
 }
