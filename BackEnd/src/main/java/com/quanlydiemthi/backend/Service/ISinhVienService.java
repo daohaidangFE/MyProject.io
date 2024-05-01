@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface ISinhVienService {
     List<SinhVienDTO> findAll();
+    SinhVienDTO findSinhVienById(Integer Id);
+    void deleteSinhVienById(Integer Id);
+    List<SinhVienDTO> searchByFullname(String tenSV);
+    List<SinhVienDTO> searchByGioiTinh(String gioiTinh);
 }

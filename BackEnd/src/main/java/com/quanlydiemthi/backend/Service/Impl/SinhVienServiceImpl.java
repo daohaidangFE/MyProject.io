@@ -2,6 +2,7 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 
 import com.quanlydiemthi.backend.Entity.SinhVien;
+import com.quanlydiemthi.backend.Exceptions.NotFoundException;
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Repository.SinhVienRepository;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
@@ -22,10 +23,36 @@ public class SinhVienServiceImpl implements ISinhVienService {
 
     @Override
     public List<SinhVienDTO> findAll() {
-        List<SinhVien> accounts = sinhvienRepository.findAll();
-        return accounts.stream()
+        List<SinhVien> sinhVien = sinhvienRepository.findAll();
+        return sinhVien.stream()
                 .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public SinhVienDTO findSinhVienById(Integer Id) {
+        SinhVien sinhvien = sinhvienRepository.findById(Id).orElseThrow(()->new NotFoundException("SinhVien", "Id", Id));
+        return modelMapper.map(sinhvien, SinhVienDTO.class);
+    }
+
+    @Override
+    public List<SinhVienDTO> searchByFullname(String tenSV) {
+        return sinhvienRepository.findAllByTenSVContainingIgnoreCase(tenSV).stream()
+                .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SinhVienDTO> searchByGioiTinh(String gioiTinh) {
+        List<SinhVien> sinhVienList = sinhvienRepository.findAllByGioiTinhContainingIgnoreCase(gioiTinh);
+        return sinhVienList.stream()
+                .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
+                .collect((Collectors.toList()));
+    }
+
+    @Override
+    public void deleteSinhVienById(Integer Id) {
+        sinhvienRepository.deleteById(Id);
     }
 
 }
