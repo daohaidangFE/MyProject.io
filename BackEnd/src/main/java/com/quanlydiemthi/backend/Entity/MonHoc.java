@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "mon_hoc")
+//@Table(name = "mon_hoc")
 public class MonHoc {
     @Id
     private Integer maMH;

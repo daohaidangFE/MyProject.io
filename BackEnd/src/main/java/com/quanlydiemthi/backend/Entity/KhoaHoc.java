@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "khoa_hoc")
+//@Table(name = "khoa_hoc")
 public class KhoaHoc {
     @Id
     private Integer maKH;

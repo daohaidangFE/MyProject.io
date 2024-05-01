@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "lop")
+//@Table(name = "lop")
 public class Lop {
     @Id
     private Integer maLop;

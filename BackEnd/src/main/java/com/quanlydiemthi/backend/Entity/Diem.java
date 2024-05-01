@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "diem")
+//@Table(name = "diem")
 public class Diem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
