@@ -1,4 +1,4 @@
-package com.quanlydiemthi.backend.Controller;
+package com.quanlydiemthi.backend.Controller.admin;
 
 
 import com.quanlydiemthi.backend.Payloads.MonHocDTO;

@@ -13,10 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-<<<<<<< HEAD
-//@Table(name = "lop")
-=======
->>>>>>> c2c351c36ed08c27daa2d687e1d4559e5f581c92
+
 public class Lop {
     @Id
     private Integer maLop;
@@ -24,13 +21,16 @@ public class Lop {
     @Column(nullable = false)
     private String tenLop;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "lop",fetch = FetchType.LAZY)
     private List<SinhVien> sinhvien;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "maKH")
     private KhoaHoc khoahoc;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "maK")
     private Khoa khoa;

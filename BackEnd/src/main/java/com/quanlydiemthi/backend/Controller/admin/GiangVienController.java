@@ -1,12 +1,9 @@
-package com.quanlydiemthi.backend.Controller;
+package com.quanlydiemthi.backend.Controller.admin;
 
 
-import com.quanlydiemthi.backend.Entity.GiangVien;
 import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
 import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
-import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Service.Impl.GiangVienServiceImpl;
-import com.quanlydiemthi.backend.Service.Impl.SinhVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,7 @@
-package com.quanlydiemthi.backend.Controller;
+package com.quanlydiemthi.backend.Controller.admin;
 
 
 import com.quanlydiemthi.backend.Payloads.LopDTO;
-import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
 import com.quanlydiemthi.backend.Service.Impl.LopServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
