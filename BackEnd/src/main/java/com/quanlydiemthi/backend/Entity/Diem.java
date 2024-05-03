@@ -26,9 +26,11 @@ public class Diem {
     @Column(nullable = false)
     private Float diemLan2;
 
+
     @ManyToOne
     @JoinColumn(name="maSV")
     private SinhVien sinhvien;
+
 
     @ManyToOne
     @JoinColumn(name="maMH")

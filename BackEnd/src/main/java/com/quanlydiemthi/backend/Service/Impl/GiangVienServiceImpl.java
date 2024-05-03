@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,38 +22,11 @@ public class GiangVienServiceImpl implements IGiangVienService {
     public ModelMapper modelMapper;
 
     @Override
-    public List<GiangVienDTO> findAll() {
-        List<GiangVien> giangVien = giangVienRepository.findAll();
-        return giangVien.stream()
-                .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public GiangVienDTO findGiangVienById(Integer Id) {
-        GiangVien giangVien = giangVienRepository.findById(Id).orElseThrow(() -> new NotFoundException("GiangVien", "Id", Id));
-        return modelMapper.map(giangVien, GiangVienDTO.class);
-    }
-
-    @Override
-    public List<GiangVienDTO> searchByFullname(String tenGV) {
-        List<GiangVien> giangVien = giangVienRepository.findGiangVienByTenGVContainingIgnoreCase(tenGV);
-        return giangVien.stream()
-                .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GiangVienDTO> searchByGioiTinh(String gioiTinh) {
-        List<GiangVien> giangVienList = giangVienRepository.findGiangVienByGioiTinhContainingIgnoreCase(gioiTinh);
+    public List<GiangVienDTO> findTeachers(Map<String, String> params) {
+        List<GiangVien> giangVienList = giangVienRepository.findTeachers(params);
         return giangVienList.stream()
                 .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void deleteGiangVienById(Integer Id) {
-        giangVienRepository.deleteById(Id);
     }
 }
 

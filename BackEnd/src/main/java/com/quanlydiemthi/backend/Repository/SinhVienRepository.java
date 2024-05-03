@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface SinhVienRepository extends JpaRepository<SinhVien, Integer>, SinhVienRepositoryCustom {
-    List<SinhVien> findAllByTenSVContainingIgnoreCase(String tenSV);
-    List<SinhVien> findAllByGioiTinhContainingIgnoreCase(String gioiTinh);
 }

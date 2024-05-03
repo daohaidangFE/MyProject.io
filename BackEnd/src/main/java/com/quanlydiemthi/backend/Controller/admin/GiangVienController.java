@@ -1,49 +1,29 @@
 package com.quanlydiemthi.backend.Controller.admin;
 
-
 import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
 import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
 import com.quanlydiemthi.backend.Service.Impl.GiangVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
-@RestController
+@Controller
+@RequestMapping("/admin")
 public class GiangVienController {
     @Autowired
     private GiangVienServiceImpl giangVienService;
 
-    @GetMapping("/api/giangvien")
-    public ResponseEntity<?> getAllGiangVien() {
-        List<GiangVienDTO> giangVienDTOList = giangVienService.findAll();
-//        giangVienDTOList.forEach(System.out::println); đánh debug
-        return ResponseEntity.ok(giangVienDTOList);
+    @GetMapping("/giangvien")
+    public String getAllGiangVien(@RequestParam Map<String, String> params, Model model) {
+        List<GiangVienDTO> giangVienDTOList = giangVienService.findTeachers(params);
+        model.addAttribute("giangVienDTOList", giangVienDTOList);
+        return "/dashboard/giangvien";
     }
 
-    @GetMapping("/api/giangvien/{id}")
-    public ResponseEntity<?> getGiangVienById(@PathVariable Integer id) {
-        GiangVienDTO giangVienDTO = giangVienService.findGiangVienById(id);
-        return ResponseEntity.ok(giangVienDTO);
-    }
-
-    @GetMapping("/api/giangvien/searchbyname")
-    public ResponseEntity<?> searchGiangVienByFullname(@RequestParam String searchValue) {
-        List<GiangVienDTO> giangVienDTOList = giangVienService.searchByFullname(searchValue.replaceAll("\s\s+", " ").trim());
-        return ResponseEntity.ok(giangVienDTOList);
-    }
-
-    @GetMapping("/api/giangvien/searchbysex")
-    public ResponseEntity<?> searchGiangVienByGioitinh(@RequestParam String searchValue) {
-        List<GiangVienDTO> giangVienDTOList = giangVienService.searchByGioiTinh(searchValue);
-        return ResponseEntity.ok(giangVienDTOList);
-    }
-
-    @DeleteMapping("/api/giangvien/{id}")
-    public ResponseEntity<?> deleteGiangVien(@PathVariable Integer id) {
-        giangVienService.deleteGiangVienById(id);
-        return new ResponseEntity<>(new ApiResponse<>("Giang vien was deleted sucessfull", true), HttpStatus.OK);
-    }
 }
