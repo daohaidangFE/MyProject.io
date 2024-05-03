@@ -1,6 +1,7 @@
 package com.quanlydiemthi.backend.Controller.admin;
 
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
+import com.quanlydiemthi.backend.Service.ISinhVienService;
 import com.quanlydiemthi.backend.Service.Impl.SinhVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class SinhVienController {
     @Autowired
-    private SinhVienServiceImpl sinhVienService;
+    private ISinhVienService sinhVienService;
 
     @GetMapping("/sinhvien")
     public String getAllSinhVien(@RequestParam Map<String, String> params, Model model) {

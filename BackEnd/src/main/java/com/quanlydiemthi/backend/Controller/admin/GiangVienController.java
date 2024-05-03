@@ -2,6 +2,7 @@ package com.quanlydiemthi.backend.Controller.admin;
 
 import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
 import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
+import com.quanlydiemthi.backend.Service.IGiangVienService;
 import com.quanlydiemthi.backend.Service.Impl.GiangVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class GiangVienController {
     @Autowired
-    private GiangVienServiceImpl giangVienService;
+    private IGiangVienService giangVienService;
 
     @GetMapping("/giangvien")
     public String getAllGiangVien(@RequestParam Map<String, String> params, Model model) {

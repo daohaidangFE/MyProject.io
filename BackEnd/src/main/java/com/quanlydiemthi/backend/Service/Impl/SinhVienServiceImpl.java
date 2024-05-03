@@ -31,9 +31,9 @@ public class SinhVienServiceImpl implements ISinhVienService {
                 .collect((Collectors.toList()));
     }
 
-    @Override
-    public void deleteSinhVienById(Integer Id) {
-        sinhvienRepository.deleteById(Id);
-    }
+//    @Override
+//    public void deleteSinhVienById(Integer Id) {
+//        sinhvienRepository.deleteById(Id);
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.quanlydiemthi.backend.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Role implements Serializable {
     @Column(name = "role_name")
     private String role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<GiangVien> giangVienList;
 }

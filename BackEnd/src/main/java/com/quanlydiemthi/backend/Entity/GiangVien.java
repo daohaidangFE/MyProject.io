@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,6 @@ public class GiangVien {
     @Id
     private Integer maGV;
 
-    @Column(nullable = false)
     private String tenGV;
 
     @Column(nullable = false)
@@ -28,10 +28,12 @@ public class GiangVien {
     @Column(nullable = false)
     private String gioiTinh;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "giangvien",fetch = FetchType.LAZY)
     private List<MonHoc> monhoc;
 }

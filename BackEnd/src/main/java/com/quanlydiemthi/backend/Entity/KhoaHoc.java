@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class KhoaHoc {
     @Column(nullable = false)
     private String tenKH;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "khoahoc",fetch = FetchType.LAZY)
     private List<Lop> lop;
 }
