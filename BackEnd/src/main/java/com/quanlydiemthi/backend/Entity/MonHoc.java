@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class MonHoc {
     @Id
-    private Integer maMH;
+    private String maMH;
 
     @Column(nullable = false)
     private String tenMH;

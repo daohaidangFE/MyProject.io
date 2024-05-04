@@ -11,11 +11,13 @@ import lombok.*;
 @Setter
 @Data
 public class GiangVienDTO {
-    private Integer maGV;
+    private String maGV;
 
     private String tenGV;
 
     private String username;
+
+    private boolean isActive;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -24,4 +26,12 @@ public class GiangVienDTO {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
+
+    public String isActive() {
+        if(isActive) {
+            return "active";
+        } else {
+            return "inactive";
+        }
+    }
 }

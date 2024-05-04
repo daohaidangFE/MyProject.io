@@ -17,8 +17,11 @@ import java.util.List;
 @Builder
 public class SinhVienDTO {
 
-    private Integer maSV;
+    private String maSV;
+
     private String tenSV;
+
+    private boolean isActive;
 
     private String username;
 
@@ -33,4 +36,12 @@ public class SinhVienDTO {
     private List<Diem> diem;
 
     private Lop lop;
+
+    public String isActive() {
+        if(isActive) {
+            return "active";
+        } else {
+            return "inactive";
+        }
+    }
 }

@@ -15,14 +15,16 @@ import java.util.List;
 
 public class GiangVien {
     @Id
-    private Integer maGV;
+    private String maGV;
 
     private String tenGV;
 
     @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    private boolean isActive = true;
+
+ ;   @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

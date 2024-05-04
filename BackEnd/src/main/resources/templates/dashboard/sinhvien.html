@@ -156,8 +156,8 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã sinh viên</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên sinh viên</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên tài khoản</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">GPA</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Trạng thái</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
 
                         </tr>
@@ -167,14 +167,19 @@
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getMaSV()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getTenSV()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getUsername()}"></td>
-                            <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getDiem()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getGioiTinh()}"></td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
-                                <a href="#" class="text-red-500 hover:text-red-700">Xóa</a></td>
+                            <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.isActive()}"></td>
+                            <td class="py-4 px-6 border-b border-grey-light">
+                                <button onclick="" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</button>
+                                <button onclick="" class="text-red-500 hover:text-red-700">Xóa</button>
+                            </td>
                         </tr>
 
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button onclick="" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Thêm</button>
                 </div>
             </div>
         </main>

@@ -17,7 +17,7 @@ public class SinhVienRepositoryImpl implements SinhVienRepositoryCustom {
         try {
             for (Map.Entry<String, String> entry : conditions.entrySet()) {
                 String fieldName = entry.getKey();
-                String value = entry.getValue();
+                String value = entry.getValue().replaceAll("\s\s+", " ").trim();
                 if ("masv".equals(fieldName) || "username".equals(fieldName) || "gioi_tinh".equals(fieldName) || "tensv".equals(fieldName)) {
                     if (value != null && !value.isEmpty()) {
                         sql.append("AND sv.").append(fieldName).append(" LIKE '%").append(value).append("%' ");

@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Controller.admin;
 
+import com.quanlydiemthi.backend.Entity.GiangVien;
 import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
 import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
 import com.quanlydiemthi.backend.Service.IGiangVienService;
@@ -26,4 +27,5 @@ public class GiangVienController {
         model.addAttribute("giangVienDTOList", giangVienDTOList);
         return "/dashboard/giangvien";
     }
+
 }

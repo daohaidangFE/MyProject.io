@@ -5,22 +5,23 @@ import com.quanlydiemthi.backend.Payloads.MonHocDTO;
 import com.quanlydiemthi.backend.Service.Impl.MonHocServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
+@RequestMapping("/admin")
 public class MonHocController {
     @Autowired
     private MonHocServiceImpl monHocService;
 
-    @GetMapping("/api/monhoc")
-    public ResponseEntity<?> getAllMonHoc() {
+    @GetMapping("/ttmonhoc")
+    public String getAllMonHoc(Model model) {
         List<MonHocDTO> monHocDTOList = monHocService.findAll();
-        return ResponseEntity.ok(monHocDTOList);
+        model.addAttribute("monHocDTOList", monHocDTOList);
+        return "/dashboard/ttmonhoc";
     }
 
     @GetMapping("/api/monhoc/{id}")
