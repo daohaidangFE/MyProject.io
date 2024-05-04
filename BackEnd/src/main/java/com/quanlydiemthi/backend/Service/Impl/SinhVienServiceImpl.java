@@ -33,9 +33,21 @@ public class SinhVienServiceImpl implements ISinhVienService {
 
     @Override
     public void deleteStudent(String maSv) {
-        SinhVien sinhVien = sinhvienRepository.findByMaSV(maSv);
+        SinhVien sinhVien = sinhvienRepository.findByMaSV(maSv.replaceAll("\s\s+", " ").trim());
         sinhVien.setActive(false);
         sinhvienRepository.save(sinhVien);
     }
 
+    @Override
+    public SinhVienDTO createStudent(SinhVienDTO sinhVienDTO) {
+        SinhVien sinhVien = new SinhVien();
+        sinhVien.setMaSV(sinhVienDTO.getMaSV().replaceAll("\s\s+", " ").trim());
+        sinhVien.setActive(true);
+        sinhVien.setTenSV(sinhVienDTO.getTenSV().replaceAll("\s\s+", " ").trim());
+        sinhVien.setGioiTinh(sinhVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        sinhVien.setUsername(sinhVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
+        sinhVien.setPassword(sinhVienDTO.getPassword().replaceAll("\s\s+", " ").trim());
+        sinhvienRepository.save(sinhVien);
+        return this.modelMapper.map(sinhVien, SinhVienDTO.class);
+    }
 }

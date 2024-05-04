@@ -9,4 +9,5 @@ import java.util.Map;
 public interface IGiangVienService {
     List<GiangVienDTO> findTeachers(Map<String, String> params);
     void deleteTeacher(String maGV);
+    GiangVienDTO createTeacher(GiangVienDTO giangVienDTO);
 }

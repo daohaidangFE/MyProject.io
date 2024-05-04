@@ -7,6 +7,7 @@ import com.quanlydiemthi.backend.Repository.GiangVienRepository;
 import com.quanlydiemthi.backend.Service.IGiangVienService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class GiangVienServiceImpl implements IGiangVienService {
 
     @Autowired
     public ModelMapper modelMapper;
+    @Qualifier("modelMapperConvert")
+    @Autowired
+    private ModelMapper modelMapperConvert;
 
     @Override
     public List<GiangVienDTO> findTeachers(Map<String, String> params) {
@@ -31,9 +35,22 @@ public class GiangVienServiceImpl implements IGiangVienService {
 
     @Override
     public void deleteTeacher(String maGV) {
-        GiangVien giangVien1 = giangVienRepository.findByMaGV(maGV);
+        GiangVien giangVien1 = giangVienRepository.findByMaGV(maGV.replaceAll("\s\s+", " ").trim());
         giangVien1.setActive(false);
         giangVienRepository.save(giangVien1);
+    }
+
+    @Override
+    public GiangVienDTO createTeacher(GiangVienDTO giangVienDTO) {
+        GiangVien giangVien = new GiangVien();
+        giangVien.setMaGV(giangVienDTO.getMaGV().replaceAll("\s\s+", " ").trim());
+        giangVien.setActive(true);
+        giangVien.setTenGV(giangVienDTO.getTenGV().replaceAll("\s\s+", " ").trim());
+        giangVien.setUsername(giangVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
+        giangVien.setPassword(giangVienDTO.getPassword().replaceAll("\s\s+", " ").trim());
+        giangVien.setGioiTinh(giangVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        giangVienRepository.save(giangVien);
+        return this.modelMapper.map(giangVien, GiangVienDTO.class);
     }
 }
 
