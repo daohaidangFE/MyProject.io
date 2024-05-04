@@ -121,7 +121,6 @@
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
             <h1 class="w-full text-3xl text-black pb-6">Giảng viên</h1>
-
             <div class="w-full mt-6">
                 <form id="searchForm" action="giangvien" method="get">
                     <div class="flex mb-4">
@@ -132,14 +131,21 @@
                             <input name="tengv" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tên giảng viên">
                         </div>
                         <div class="mr-4 flex-grow">
+                            <input name="username" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tài khoản">
+                        </div>
+                        <div class="mr-4 flex-grow">
                             <select name="gioi_tinh" class="block w-full px-3 py-2.5 text-gray-700 border rounded-lg focus:outline-none ">
-                                <option value="">Tất cả</option>
+                                <option value="">Giới tính</option>
                                 <option value="nam">Nam</option>
                                 <option value="nu">Nữ</option>
                             </select>
                         </div>
                         <div class="mr-4 flex-grow">
-                            <input name="username" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tài khoản">
+                            <select name="is_active" class="block w-full px-3 py-2.5 text-gray-700 border rounded-lg focus:outline-none ">
+                                <option value="">Trạng thái</option>
+                                <option value="true">active</option>
+                                <option value="false">inactive</option>
+                            </select>
                         </div>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Tìm kiếm
