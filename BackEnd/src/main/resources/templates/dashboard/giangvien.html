@@ -125,19 +125,20 @@
             <div class="w-full mt-6">
                 <form id="searchForm" action="giangvien" method="get">
                     <div class="flex mb-4">
-                        <div class="mr-4">
+                        <div class="mr-4 flex-grow">
                             <input name="magv" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Mã giảng viên">
                         </div>
-                        <div class="mr-4">
+                        <div class="mr-4 flex-grow">
                             <input name="tengv" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tên giảng viên">
                         </div>
-                        <div class="mr-4">
-                            <select name="gioi_tinh" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none">
+                        <div class="mr-4 flex-grow">
+                            <select name="gioi_tinh" class="block w-full px-3 py-2.5 text-gray-700 border rounded-lg focus:outline-none ">
+                                <option value="">Tất cả</option>
                                 <option value="nam">Nam</option>
                                 <option value="nu">Nữ</option>
                             </select>
                         </div>
-                        <div class="mr-4">
+                        <div class="mr-4 flex-grow">
                             <input name="username" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tài khoản">
                         </div>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
@@ -145,7 +146,6 @@
                         </button>
                     </div>
                 </form>
-
 
                 <p class="text-xl pb-3 flex items-center">
                     <i class="fas fa-list mr-3"></i> Danh sách giảng viên
@@ -158,7 +158,7 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên giảng viên</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên tài khoản</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Xem chi tiết</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
 
                         </tr>
                         </thead>
@@ -169,7 +169,8 @@
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getTenGV()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getGioiTinh()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getUsername()}"></td>
-                                <td class="py-4 px-6 border-b border-grey-light"><a href="#" class="hover:underline">Chi tiết</a></td>
+                                <td class="py-4 px-6 border-b border-grey-light"><a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
+                                    <a href="#" class="text-red-500 hover:text-red-700">Xóa</a></td>
                             </tr>
                         </tbody>
                     </table>
