@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MonHocDTO {
 
-    private Integer maMH;
+    private String maMH;
 
     private String tenMH;
 

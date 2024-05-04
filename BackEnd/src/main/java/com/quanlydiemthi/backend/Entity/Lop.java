@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Lop {
     @Id
-    private Integer maLop;
+    private String maLop;
 
     @Column(nullable = false)
     private String tenLop;

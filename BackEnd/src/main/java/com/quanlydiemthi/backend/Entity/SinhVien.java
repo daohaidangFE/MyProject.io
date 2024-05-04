@@ -18,12 +18,15 @@ import java.util.Set;
 
 public class SinhVien {
     @Id
-    private Integer maSV;
+    private String maSV;
 
     private String tenSV;
 
     @Column(nullable = false)
     private String username;
+
+
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private String password;
