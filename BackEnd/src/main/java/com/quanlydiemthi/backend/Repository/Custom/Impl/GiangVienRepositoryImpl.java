@@ -1,7 +1,6 @@
 package com.quanlydiemthi.backend.Repository.Custom.Impl;
 
 import com.quanlydiemthi.backend.Entity.GiangVien;
-import com.quanlydiemthi.backend.Entity.SinhVien;
 import com.quanlydiemthi.backend.Repository.Custom.GiangVienRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

@@ -24,11 +24,4 @@ public class SinhVienController {
         model.addAttribute("sinhVienDTOList", sinhVienDTOList);
         return "/dashboard/sinhvien";
     }
-
-//    @DeleteMapping
-//    public ResponseEntity<?> deleteSinhVienById(@PathVariable int id) {
-//        sinhVienService.deleteSinhVienById(id);
-//        return new ResponseEntity<>(new ApiResponse<>("Sinh vien was deleted sucessfully", true), HttpStatus.OK);
-//    }
-
 }
