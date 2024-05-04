@@ -18,7 +18,6 @@ import java.util.List;
 public class SinhVienDTO {
 
     private Integer maSV;
-
     private String tenSV;
 
     private String username;

@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,9 +22,11 @@ public class MonHoc {
     @Column(nullable = false)
     private Integer soTinChi;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "monhoc",fetch = FetchType.LAZY)
         private List<Diem> diem;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "maGV")
     private GiangVien giangvien;

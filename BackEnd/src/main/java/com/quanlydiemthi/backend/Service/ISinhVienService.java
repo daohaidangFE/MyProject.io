@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface ISinhVienService {
-    void deleteSinhVienById(Integer Id);
+//    void deleteSinhVienById(Integer Id);
     List<SinhVienDTO> findStudents(Map<String, String> params);
 }

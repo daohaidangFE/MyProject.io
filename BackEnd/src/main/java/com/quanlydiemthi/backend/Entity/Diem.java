@@ -26,12 +26,12 @@ public class Diem {
     @Column(nullable = false)
     private Float diemLan2;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="maSV")
     private SinhVien sinhvien;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="maMH")
     private MonHoc monhoc;

@@ -17,7 +17,6 @@ public class GiangVien {
     @Id
     private Integer maGV;
 
-    @Column(nullable = false)
     private String tenGV;
 
     @Column(nullable = false)

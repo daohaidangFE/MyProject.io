@@ -16,12 +16,11 @@ public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
     public static void queryNormal(StringBuilder sql, Map<String, String> conditions) {
         try {
             for (Map.Entry<String, String> entry : conditions.entrySet()) {
-                String fieldName=entry.getKey();
-                String value=entry.getValue();
-                if("magv".equals(fieldName) || "role_id".equals(fieldName) || "gioi_tinh".equals(fieldName) || "username".equals(fieldName)
-                        || "tengv".equals(fieldName)) {
-                    if(value != null && !value.isEmpty()) {
-                        sql.append(" AND g.").append(fieldName).append(" LIKE '%").append(value).append("%' ");
+                String fieldName = entry.getKey();
+                String value = entry.getValue();
+                if ("magv".equals(fieldName) || "username".equals(fieldName) || "gioi_tinh".equals(fieldName) || "tengv".equals(fieldName)) {
+                    if (value != null && !value.isEmpty()) {
+                        sql.append("AND gv.").append(fieldName).append(" LIKE '%").append(value).append("%' ");
                     }
                 }
             }
@@ -29,13 +28,12 @@ public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
             e.printStackTrace();
         }
     }
-
     @Override
     public List<GiangVien> findTeachers(Map<String, String> conditions) {
-        StringBuilder sql=new StringBuilder("SELECT g.* FROM giang_vien g ");
-        sql.append(" WHERE 1 = 1 ");
+        StringBuilder sql = new StringBuilder("SELECT gv.* FROM giang_vien gv ");
+        sql.append("WHERE 1 = 1 ");
         queryNormal(sql, conditions);
-        sql.append(" Group by g.magv ");
+        sql.append(" GROUP BY gv.magv");
         Query query = entityManager.createNativeQuery(sql.toString(), GiangVien.class);
         return query.getResultList();
     }
