@@ -30,5 +30,12 @@ public class SinhVienServiceImpl implements ISinhVienService {
                 .map((sinhvien) -> this.modelMapper.map(sinhvien, SinhVienDTO.class))
                 .collect((Collectors.toList()));
     }
-    
+
+    @Override
+    public void deleteStudent(String maSv) {
+        SinhVien sinhVien = sinhvienRepository.findByMaSV(maSv);
+        sinhVien.setActive(false);
+        sinhvienRepository.save(sinhVien);
+    }
+
 }

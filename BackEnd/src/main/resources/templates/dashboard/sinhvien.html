@@ -147,7 +147,7 @@
                     <i class="fas fa-list mr-3"></i> Danh sách sinh viên
                 </p>
                 <div class="bg-white overflow-auto">
-                    <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+                    <table class="text-left w-full border-collapse"> <!-- Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
                         <thead>
                         <tr>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã sinh viên</th>
@@ -156,7 +156,6 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">GPA</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -166,12 +165,14 @@
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getUsername()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getDiem()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getGioiTinh()}"></td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
-                                <a href="#" class="text-red-500 hover:text-red-700">Xóa</a></td>
+                            <td class="py-4 px-6 border-b border-gray-200">
+                                <a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
+                                <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
+                            </td>
                         </tr>
-
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </main>
@@ -183,5 +184,31 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+<script>
+    function confirmDelete(button) {
+        var row = button.closest("tr");
+        var maSV = row.querySelector("td:nth-child(1)").innerText;
+        if (confirm("Bạn có chắc chắn muốn xóa sinh viên này không?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "/api/sinhvien/" + maSV, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert("Xóa sinh viên thành công!");
+                        window.location.href = "sinhvien";
+                    } else {
+                        alert("Đã xảy ra lỗi!");
+                        window.location.href = "sinhvien";
+                    }
+                }
+            };
+            xhr.send();
+        } else {
+            window.location.href = "sinhvien";
+            console.log("Hủy bỏ xóa sinh viên với mã: " + maSV);
+        }
+    }
+
+</script>
 </body>
 </html>

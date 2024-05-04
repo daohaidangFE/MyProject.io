@@ -8,4 +8,5 @@ import java.util.Map;
 public interface ISinhVienService {
 //    void deleteSinhVienById(Integer Id);
     List<SinhVienDTO> findStudents(Map<String, String> params);
+    void deleteStudent(String id);
 }

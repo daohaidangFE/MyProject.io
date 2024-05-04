@@ -25,7 +25,6 @@ public class SinhVien {
     @Column(nullable = false)
     private String username;
 
-
     private boolean isActive = true;
 
     @Column(nullable = false)

@@ -31,7 +31,7 @@ public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
     @Override
     public List<GiangVien> findTeachers(Map<String, String> conditions) {
         StringBuilder sql = new StringBuilder("SELECT gv.* FROM giang_vien gv ");
-        sql.append("WHERE 1 = 1 ");
+        sql.append("WHERE 1 = 1 AND gv.is_active = 1 ");
         queryNormal(sql, conditions);
         sql.append(" GROUP BY gv.magv");
         Query query = entityManager.createNativeQuery(sql.toString(), GiangVien.class);

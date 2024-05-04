@@ -2,7 +2,6 @@ package com.quanlydiemthi.backend.Controller.admin;
 
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
-import com.quanlydiemthi.backend.Service.Impl.SinhVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -31,7 +31,7 @@ public class SinhVienRepositoryImpl implements SinhVienRepositoryCustom {
     @Override
     public List<SinhVien> findStudents(Map<String, String> conditions) {
         StringBuilder sql = new StringBuilder("SELECT sv.* FROM sinh_vien sv ");
-        sql.append("WHERE 1 = 1 ");
+        sql.append("WHERE 1 = 1 AND sv.is_active = 1 ");
         queryNormal(sql, conditions);
         sql.append(" GROUP BY sv.masv");
         Query query = entityManager.createNativeQuery(sql.toString(), SinhVien.class);

@@ -24,7 +24,7 @@ public class GiangVien {
 
     private boolean isActive = true;
 
- ;   @Column(nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface GiangVienRepository extends JpaRepository<GiangVien, Integer>, GiangVienRepositoryCustom {
-
+    GiangVien findByMaGV(String maGV);
 }

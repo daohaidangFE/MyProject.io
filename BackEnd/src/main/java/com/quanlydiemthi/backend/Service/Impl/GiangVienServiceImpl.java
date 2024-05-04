@@ -29,5 +29,11 @@ public class GiangVienServiceImpl implements IGiangVienService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteTeacher(String maGV) {
+        GiangVien giangVien1 = giangVienRepository.findByMaGV(maGV);
+        giangVien1.setActive(false);
+        giangVienRepository.save(giangVien1);
+    }
 }
 

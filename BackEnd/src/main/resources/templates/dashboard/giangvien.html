@@ -169,8 +169,9 @@
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getTenGV()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getGioiTinh()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getUsername()}"></td>
-                                <td class="py-4 px-6 border-b border-grey-light"><a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
-                                    <a href="#" class="text-red-500 hover:text-red-700">Xóa</a></td>
+                                <td class="py-4 px-6 border-b border-grey-light">
+                                    <a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
+                                    <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
                             </tr>
                         </tbody>
                     </table>
@@ -256,25 +257,30 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-<!--<script>-->
-<!--    $(document).ready(function(){-->
-<!--        $('#searchForm').submit(function(event){-->
-<!--            event.preventDefault(); // Ngăn chặn form submit mặc định-->
+<script>
+    function confirmDelete(button) {
+        var row = button.closest("tr");
+        var maGV = row.querySelector("td:nth-child(1)").innerText;
+        if (confirm("Bạn có chắc chắn muốn xóa giảng viên không?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("DELETE", "/api/giangvien/" + maGV, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        alert("Xóa giảng viên thành công!");
+                        window.location.href = "giangvien";
+                    } else {
+                        alert("Đã xảy ra lỗi!");
+                        window.location.href = "giangvien";
+                    }
+                }
+            };
+            xhr.send();
+        } else {
+            window.location.href = "giangvien";
+        }
+    }
 
-<!--            var formData = $(this).serialize(); // Thu thập dữ liệu từ form-->
-
-<!--            $.ajax({-->
-<!--                type: 'POST',-->
-<!--                url: '/admin/giangvien',-->
-<!--                data: formData,-->
-<!--                success: function(response){-->
-<!--                    // Xử lý kết quả trả về từ máy chủ-->
-<!--                    console.log(response);-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    });-->
-
-<!--</script>-->
+</script>
 </body>
 </html>
