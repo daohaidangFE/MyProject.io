@@ -9,10 +9,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 import java.util.Map;
 
-
-
 public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
-
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -22,9 +19,9 @@ public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
                 String fieldName=entry.getKey();
                 String value=entry.getValue();
                 if("magv".equals(fieldName) || "role_id".equals(fieldName) || "gioi_tinh".equals(fieldName) || "username".equals(fieldName)
-                || "tengv".equals(fieldName)) {
-                    if(value != null || !value.isEmpty()) {
-                        sql.append("AND gv.").append(fieldName).append("LIKE '%").append(value).append("%' ");
+                        || "tengv".equals(fieldName)) {
+                    if(value != null && !value.isEmpty()) {
+                        sql.append(" AND g.").append(fieldName).append(" LIKE '%").append(value).append("%' ");
                     }
                 }
             }
@@ -35,12 +32,11 @@ public class GiangVienRepositoryImpl implements GiangVienRepositoryCustom {
 
     @Override
     public List<GiangVien> findTeachers(Map<String, String> conditions) {
-        StringBuilder sql=new StringBuilder("SELECT gv. FROM giang_vien gv ");
-        sql.append("WHERE 1 = 1 ");
+        StringBuilder sql=new StringBuilder("SELECT g.* FROM giang_vien g ");
+        sql.append(" WHERE 1 = 1 ");
         queryNormal(sql, conditions);
-        sql.append("group by gv.magv ");
-        Query query = entityManager.createQuery(sql.toString(), GiangVien.class);
+        sql.append(" Group by g.magv ");
+        Query query = entityManager.createNativeQuery(sql.toString(), GiangVien.class);
         return query.getResultList();
     }
 }
-
