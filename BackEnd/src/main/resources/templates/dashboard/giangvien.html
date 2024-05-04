@@ -123,6 +123,30 @@
             <h1 class="w-full text-3xl text-black pb-6">Giảng viên</h1>
 
             <div class="w-full mt-6">
+                <form id="searchForm" action="giangvien" method="get">
+                    <div class="flex mb-4">
+                        <div class="mr-4">
+                            <input name="magv" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Mã giảng viên">
+                        </div>
+                        <div class="mr-4">
+                            <input name="tengv" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tên giảng viên">
+                        </div>
+                        <div class="mr-4">
+                            <select name="gioi_tinh" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none">
+                                <option value="nam">Nam</option>
+                                <option value="nu">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="mr-4">
+                            <input name="username" class="block w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" type="text" placeholder="Tài khoản">
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </form>
+
+
                 <p class="text-xl pb-3 flex items-center">
                     <i class="fas fa-list mr-3"></i> Danh sách giảng viên
                 </p>
@@ -139,6 +163,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                             <tr th:each="giangVien : ${giangVienDTOList}" class="hover:bg-grey-lighter">
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getMaGV()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getTenGV()}"></td>
@@ -230,5 +255,25 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <!-- Font Awesome -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $('#searchForm').submit(function(event){-->
+<!--            event.preventDefault(); // Ngăn chặn form submit mặc định-->
+
+<!--            var formData = $(this).serialize(); // Thu thập dữ liệu từ form-->
+
+<!--            $.ajax({-->
+<!--                type: 'POST',-->
+<!--                url: '/admin/giangvien',-->
+<!--                data: formData,-->
+<!--                success: function(response){-->
+<!--                    // Xử lý kết quả trả về từ máy chủ-->
+<!--                    console.log(response);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+
+<!--</script>-->
 </body>
 </html>

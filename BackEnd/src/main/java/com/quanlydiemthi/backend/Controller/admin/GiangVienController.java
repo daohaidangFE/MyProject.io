@@ -26,5 +26,4 @@ public class GiangVienController {
         model.addAttribute("giangVienDTOList", giangVienDTOList);
         return "/dashboard/giangvien";
     }
-
 }
