@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Controller.admin;
 
+import com.quanlydiemthi.backend.Entity.SinhVien;
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,5 @@ public class SinhVienController {
         model.addAttribute("sinhVienDTOList", sinhVienDTOList);
         return "/dashboard/sinhvien";
     }
+
 }

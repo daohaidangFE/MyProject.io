@@ -2,7 +2,6 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 
 import com.quanlydiemthi.backend.Entity.SinhVien;
-import com.quanlydiemthi.backend.Exceptions.NotFoundException;
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Repository.SinhVienRepository;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
@@ -10,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,5 +47,19 @@ public class SinhVienServiceImpl implements ISinhVienService {
         sinhVien.setPassword(sinhVienDTO.getPassword().replaceAll("\s\s+", " ").trim());
         sinhvienRepository.save(sinhVien);
         return this.modelMapper.map(sinhVien, SinhVienDTO.class);
+    }
+
+    @Override
+    public SinhVien findStudent(String maSV) {
+        return sinhvienRepository.findByMaSV(maSV);
+    }
+    @Override
+    public void updateStudent(SinhVienDTO sinhVienDTO) {
+        SinhVien sinhVien = sinhvienRepository.findByMaSV(sinhVienDTO.getMaSV());
+        sinhVien.setTenSV(sinhVienDTO.getTenSV().replaceAll("\s\s+", " ").trim());
+        sinhVien.setGioiTinh(sinhVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        sinhVien.setUsername(sinhVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
+        sinhvienRepository.save(sinhVien);
+        this.modelMapper.map(sinhVien, SinhVienDTO.class);
     }
 }
