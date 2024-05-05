@@ -21,10 +21,13 @@ public class Diem {
     private String hocKy;
 
     @Column(nullable = false)
-    private Float diemLan1;
+    private Float diemGiuaKy;
 
     @Column(nullable = false)
-    private Float diemLan2;
+    private Float diemCuoiKy;
+
+    @Column(nullable = false)
+    private Float diemTongKet;
 
     @JsonIgnore
     @ManyToOne

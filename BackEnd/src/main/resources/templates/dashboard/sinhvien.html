@@ -39,10 +39,6 @@
             <i class="fa fa-clipboard fa-inverse mr-3"></i>
             Giảng Viên
         </a>
-        <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-            <i class="fa fa-info fa-inverse mr-3"></i>
-            Thông tin chung
-        </a>
         <a href="ttmonhoc" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fa fa-table fa-inverse mr-3"></i>
             Thông tin môn học
@@ -50,10 +46,6 @@
         <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fa fa-book fa-inverse mr-3"></i>
             Khoa chuyên môn
-        </a>
-        <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-            <i class="fa fa-user fa-inverse mr-3"></i>
-            Người dùng
         </a>
     </nav>
 </aside>
@@ -97,10 +89,6 @@
                 <i class="fa fa-clipboard fa-inverse mr-3"></i>
                 Giảng Viên
             </a>
-            <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fa fa-info fa-inverse mr-3"></i>
-                Thông tin chung
-            </a>
             <a href="ttmonhoc" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fa fa-table fa-inverse mr-3"></i>
                 Thông tin môn học
@@ -108,10 +96,6 @@
             <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fa fa-book fa-inverse mr-3"></i>
                 Khoa chuyên môn
-            </a>
-            <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fa fa-user fa-inverse mr-3"></i>
-                Người dùng
             </a>
         </nav>
 
@@ -155,6 +139,7 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên tài khoản</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">GPA</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Email</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
                         </tr>
                         </thead>
@@ -165,6 +150,7 @@
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getUsername()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getDiem()}"></td>
                             <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getGioiTinh()}"></td>
+                            <td class="py-4 px-6 border-b border-grey-light" th:text="${sinhVien.getEmail()}"></td>
                             <td class="py-4 px-6 border-b border-gray-200">
                                 <a href="#" class="text-blue-500 hover:text-blue-700 mr-2" onclick="editStudent(this)" th:attr="data-maSV=${sinhVien.maSV}">Sửa</a>
                                 <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
@@ -200,6 +186,10 @@
             <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Tài khoản:</label>
             <input id="username" type="text" name="username" placeholder="Tài khoản" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
         </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+            <input id="email" name="email" type="email" name="email" placeholder="Email" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+        </div>
         <button id="saveButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Lưu</button>
         <button type="button" onclick="closeForm()"  class="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-800 focus:outline-none">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,8 +201,9 @@
 
 <!-- AlpineJS -->
 
-<!-- phần chức năng xoá -->
+
 <script>
+    //sửa sv
     var isEditing = false;
     function editStudent(element) {
         var maSV = element.getAttribute('data-maSV');
@@ -227,11 +218,16 @@
                 var tensv = data.tenSV;
                 var gioiTinh = data.gioiTinh;
                 var username = data.username;
+                var email = data.email;
 
                 document.getElementById("masv").value = masv;
                 document.getElementById("tensv").value = tensv;
                 document.getElementById("gioi_tinh").value = gioiTinh;
                 document.getElementById("username").value = username;
+                document.getElementById("email").value = email;
+
+                document.getElementById("masv").readOnly = true;
+                document.getElementById("username").readOnly = true;
 
                 toggleAddForm();
             })
@@ -246,12 +242,14 @@
             var tenSV = $("#tensv").val();
             var gioiTinh = $("#gioi_tinh").val();
             var username = $("#username").val();
+            var email = $("#email").val();
 
             var sinhVien = {
                 "maSV": maSV,
                 "tenSV": tenSV,
                 "gioiTinh": gioiTinh,
-                "username": username
+                "username": username,
+                "email": email
             };
 
             $.ajax({
@@ -278,18 +276,22 @@
             addSinhVien();
         }
     })
+
+    //thêm sinhvien
     function addSinhVien() {
         var masv = document.getElementById("masv").value;
         var tensv = document.getElementById("tensv").value;
         var username = document.getElementById("username").value;
         var gioi_tinh = document.getElementById("gioi_tinh").value;
+        var email = document.getElementById("email").value;
 
         var sinhVien = {
             maSV: masv,
             tenSV: tensv,
             username: username,
             gioiTinh: gioi_tinh,
-            password: username
+            password: username,
+            email: email
         };
 
         fetch('/api/sinhvien', {
@@ -310,6 +312,8 @@
                 window.location.href = "sinhvien";
             });
     }
+
+    //xoá
     function confirmDelete(button) {
         var row = button.closest("tr");
         var maSV = row.querySelector("td:nth-child(1)").innerText;
@@ -334,8 +338,7 @@
         }
     }
 
-<!--Gọi api chức năng thêm-->
-
+    // hiển thị form
     function closeForm() {
         var addStudentForm = document.getElementById("addStudentForm");
         addStudentForm.style.display = "none";

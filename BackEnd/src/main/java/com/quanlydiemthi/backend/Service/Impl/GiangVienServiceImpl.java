@@ -21,9 +21,6 @@ public class GiangVienServiceImpl implements IGiangVienService {
 
     @Autowired
     public ModelMapper modelMapper;
-    @Qualifier("modelMapperConvert")
-    @Autowired
-    private ModelMapper modelMapperConvert;
 
     @Override
     public List<GiangVienDTO> findTeachers(Map<String, String> params) {
@@ -49,8 +46,25 @@ public class GiangVienServiceImpl implements IGiangVienService {
         giangVien.setUsername(giangVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
         giangVien.setPassword(giangVienDTO.getPassword().replaceAll("\s\s+", " ").trim());
         giangVien.setGioiTinh(giangVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        giangVien.setEmail(giangVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
         giangVienRepository.save(giangVien);
         return this.modelMapper.map(giangVien, GiangVienDTO.class);
+    }
+
+    @Override
+    public GiangVien findTeacher(String maGV) {
+        return giangVienRepository.findByMaGV(maGV);
+    }
+
+    @Override
+    public void updateTeacher(GiangVienDTO giangVienDTO) {
+        GiangVien giangVien = giangVienRepository.findByMaGV(giangVienDTO.getMaGV());
+        giangVien.setTenGV(giangVienDTO.getTenGV().replaceAll("\s\s+", " ").trim());
+        giangVien.setGioiTinh(giangVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        giangVien.setUsername(giangVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
+        giangVien.setEmail(giangVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
+        giangVienRepository.save(giangVien);
+        this.modelMapper.map(giangVien, GiangVienDTO.class);
     }
 }
 

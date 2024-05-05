@@ -35,4 +35,9 @@ public class Lop {
     @JoinColumn(name = "maK")
     private Khoa khoa;
 
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "maGV")
+    private GiangVien giangVien;
+
 }

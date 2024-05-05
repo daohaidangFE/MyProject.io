@@ -26,8 +26,4 @@ public class MonHoc {
     @OneToMany(mappedBy = "monhoc",fetch = FetchType.LAZY)
         private List<Diem> diem;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "maGV")
-    private GiangVien giangvien;
 }

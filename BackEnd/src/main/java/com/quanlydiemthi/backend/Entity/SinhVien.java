@@ -33,6 +33,9 @@ public class SinhVien {
     @Column(nullable = false)
     private String gioiTinh;
 
+    @Column(nullable = false)
+    private String email;
+
     @JsonIgnore
     @OneToMany(mappedBy = "sinhvien",fetch = FetchType.LAZY)
     private List<Diem> diem;

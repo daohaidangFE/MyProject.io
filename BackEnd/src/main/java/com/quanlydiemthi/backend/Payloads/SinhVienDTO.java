@@ -30,6 +30,8 @@ public class SinhVienDTO {
 
     private String gioiTinh;
 
+    private String email;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
 

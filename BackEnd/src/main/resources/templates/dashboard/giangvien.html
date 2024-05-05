@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý điểm thi admin</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Tailwind -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -39,10 +40,6 @@
             <i class="fa fa-clipboard fa-inverse mr-3"></i>
             Giảng Viên
         </a>
-        <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-            <i class="fa fa-info fa-inverse mr-3"></i>
-            Thông tin chung
-        </a>
         <a href="ttmonhoc" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fa fa-table fa-inverse mr-3"></i>
             Thông tin môn học
@@ -50,10 +47,6 @@
         <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fa fa-book fa-inverse mr-3"></i>
             Khoa chuyên môn
-        </a>
-        <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-            <i class="fa fa-user fa-inverse mr-3"></i>
-            Người dùng
         </a>
     </nav>
 </aside>
@@ -99,10 +92,6 @@
                 <i class="fa fa-clipboard fa-inverse mr-3"></i>
                 Giảng Viên
             </a>
-            <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fa fa-info fa-inverse mr-3"></i>
-                Thông tin chung
-            </a>
             <a href="ttmonhoc" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fa fa-table fa-inverse mr-3"></i>
                 Thông tin môn học
@@ -110,10 +99,6 @@
             <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fa fa-book fa-inverse mr-3"></i>
                 Khoa chuyên môn
-            </a>
-            <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fa fa-user fa-inverse mr-3"></i>
-                Người dùng
             </a>
         </nav>
     </header>
@@ -158,6 +143,7 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên giảng viên</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên tài khoản</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Email</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
 
                         </tr>
@@ -169,8 +155,9 @@
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getTenGV()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getGioiTinh()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getUsername()}"></td>
+                                <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getEmail()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light">
-                                    <a href="#" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</a>
+                                    <a href="#" class="text-blue-500 hover:text-blue-700 mr-2" onclick="editTeacher(this)" th:attr="data-maGV=${giangVien.maGV}">Sửa</a>
                                     <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
                             </tr>
                         </tbody>
@@ -188,22 +175,26 @@
     <form>
         <div class="mb-4">
             <label for="magv" class="block text-gray-700 text-sm font-bold mb-2">Mã giảng viên:</label>
-            <input id="magv" type="text" placeholder="Mã giảng viên" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+            <input id="magv" type="text" name="magv" placeholder="Mã giảng viên" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
         </div>
         <div class="mb-4">
             <label for="tengv" class="block text-gray-700 text-sm font-bold mb-2">Tên giảng viên:</label>
-            <input id="tengv" type="text" placeholder="Tên giảng viên" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+            <input id="tengv" type="text" name="tengv" placeholder="Tên giảng viên" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
         </div>
         <div class="mb-4">
             <label for="gioi_tinh" class="block text-gray-700 text-sm font-bold mb-2">Giới tính:</label>
-            <input id="gioi_tinh" type="text" placeholder="Giới tính" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+            <input id="gioi_tinh" name="gioiTinh" type="text" placeholder="Giới tính" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
         </div>
         <div class="mb-4">
             <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Tài khoản:</label>
-            <input id="username" type="text" placeholder="Tài khoản" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+            <input id="username" name="username" type="text" placeholder="Tài khoản" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
         </div>
-        <button onclick="addGiangVien()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Lưu</button>
-        <button onclick="closeForm()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-800 focus:outline-none">
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+            <input id="email" name="email" type="email" placeholder="Email" class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline" required>
+        </div>
+        <button id="saveButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Lưu</button>
+        <button type="button" onclick="closeForm()" class="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-800 focus:outline-none">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -211,12 +202,122 @@
     </form>
 </div>
 
-<!--Gọi api chức năng xoá-->
 <script>
+    //sửa sv
+    var isEditing = false;
+    function editTeacher(element) {
+        var maGV = element.getAttribute('data-maGV');
+        console.log('Mã giảng viên: ', maGV);
+
+        isEditing = true
+        fetch('/api/giangvien/' + maGV)
+            .then(response => response.json())
+            .then(data => {
+
+                var magv = data.maGV;
+                var tengv = data.tenGV;
+                var gioiTinh = data.gioiTinh;
+                var username = data.username;
+                var email = data.email;
+
+                document.getElementById("magv").value = magv;
+                document.getElementById("tengv").value = tengv;
+                document.getElementById("gioi_tinh").value = gioiTinh;
+                document.getElementById("username").value = username;
+                document.getElementById("email").value = email;
+
+                document.getElementById("magv").readOnly = true;
+                document.getElementById("username").readOnly = true;
+
+                toggleAddForm();
+            })
+            .catch(error => console.error('Có lỗi xảy ra:', error));
+    }
+
+
+    $("#saveButton").click(function (e) {
+        e.preventDefault()
+        if(isEditing){
+            var maGV = $("#magv").val();
+            var tenGV = $("#tengv").val();
+            var gioiTinh = $("#gioi_tinh").val();
+            var username = $("#username").val();
+            var email = $("#email").val();
+
+            var giangVien = {
+                "maGV": maGV,
+                "tenGV": tenGV,
+                "gioiTinh": gioiTinh,
+                "username": username,
+                "email": email
+            };
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/api/giangvien/" + maGV,
+                data: JSON.stringify(giangVien),
+                success: function (result) {
+                    if (result === "success") {
+                        alert("Cập nhật thành công!");
+                        window.location.href = "giangvien";
+                    } else {
+                        alert("Đã có lỗi xảy ra!");
+                        window.location.href = "giangvien";
+                    }
+                },
+                error: function () {
+                    alert("Đã có lỗi xảy ra!");
+                    window.location.href = "giangvien";
+                }
+            });
+        }
+        else{
+            addGiangVien();
+        }
+    })
+
+    //thêm giangvien
+    function addGiangVien() {
+        var magv = document.getElementById("magv").value;
+        var tengv = document.getElementById("tengv").value;
+        var username = document.getElementById("username").value;
+        var gioi_tinh = document.getElementById("gioi_tinh").value;
+        var email = document.getElementById("email").value;
+
+        var giangVien = {
+            maGV: magv,
+            tenGV: tengv,
+            username: username,
+            gioiTinh: gioi_tinh,
+            password: username,
+            email: email
+        };
+
+        fetch('/api/giangvien', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(giangVien),
+        })
+            .then(response => response.json())
+            .then(giangVien => {
+                alert("Thêm thành công!");
+                window.location.href = "giangvien";
+            })
+            .catch((error) => {
+                console.error('Có lỗi xảy ra:', error);
+                alert("Đã có lỗi xảy ra!");
+                window.location.href = "giangvien";
+            });
+    }
+
+    //xoá
     function confirmDelete(button) {
         var row = button.closest("tr");
         var maGV = row.querySelector("td:nth-child(1)").innerText;
-        if (confirm("Bạn có chắc chắn muốn xóa giảng viên không?")) {
+        if (confirm("Bạn có chắc chắn muốn xóa giảng viên này không?")) {
             var xhr = new XMLHttpRequest();
             xhr.open("DELETE", "/api/giangvien/" + maGV, true);
             xhr.onreadystatechange = function() {
@@ -233,12 +334,11 @@
             xhr.send();
         } else {
             window.location.href = "giangvien";
+            console.log("Hủy bỏ xóa giảng viên với mã: " + maGV);
         }
     }
 
-</script>
-<!--Gọi api chức năng thêm-->
-<script>
+    // hiển thị form
     function closeForm() {
         var addTeacherForm = document.getElementById("addTeacherForm");
         addTeacherForm.style.display = "none";
@@ -262,41 +362,7 @@
         }
     }
 
-    function addGiangVien() {
-        var magv = document.getElementById("magv").value;
-        var tengv = document.getElementById("tengv").value;
-        var username = document.getElementById("username").value;
-        var gioi_tinh = document.getElementById("gioi_tinh").value;
-
-        var giangVien = {
-            maGV: magv,
-            tenGV: tengv,
-            username: username,
-            gioiTinh: gioi_tinh,
-            password: username
-        };
-
-        fetch('/api/giangvien', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(giangVien),
-        })
-            .then(response => response.json())
-            .then(giangVien => {
-                window.location.href = "giangvien";
-            })
-            .catch((error) => {
-                console.error('Có lỗi xảy ra:', error);
-                alert("Đã xảy ra lỗi khi thêm giảng viên");
-                window.location.href = "giangvien";
-            });
-    }
-
-
 </script>
-
 
 
 

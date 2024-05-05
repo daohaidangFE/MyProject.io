@@ -30,12 +30,14 @@ public class GiangVien {
     @Column(nullable = false)
     private String gioiTinh;
 
+    @Column(nullable = false)
+    private String email;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "giangvien",fetch = FetchType.LAZY)
-    private List<MonHoc> monhoc;
+    @OneToOne(mappedBy = "giangVien")
+    private Lop lop;
 }

@@ -24,6 +24,8 @@ public class GiangVienDTO {
 
     private String gioiTinh;
 
+    private String email;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
 

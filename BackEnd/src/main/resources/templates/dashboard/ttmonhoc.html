@@ -39,10 +39,6 @@
       <i class="fa fa-clipboard fa-inverse mr-3"></i>
       Giảng Viên
     </a>
-    <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-      <i class="fa fa-info fa-inverse mr-3"></i>
-      Thông tin chung
-    </a>
     <a href="ttmonhoc" class="active-nav-link flex items-center text-white py-4 pl-6 nav-item">
       <i class="fa fa-table fa-inverse mr-3"></i>
       Thông tin môn học
@@ -50,10 +46,6 @@
     <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
       <i class="fa fa-book fa-inverse mr-3"></i>
       Khoa chuyên môn
-    </a>
-    <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-      <i class="fa fa-user fa-inverse mr-3"></i>
-      Người dùng
     </a>
   </nav>
 </aside>
@@ -99,10 +91,6 @@
         <i class="fa fa-clipboard fa-inverse mr-3"></i>
         Giảng Viên
       </a>
-      <a href="thongtinchung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-        <i class="fa fa-info fa-inverse mr-3"></i>
-        Thông tin chung
-      </a>
       <a href="ttmonhoc" class="active-nav-link flex items-center text-white py-4 pl-6 nav-item">
         <i class="fa fa-table fa-inverse mr-3"></i>
         Thông tin môn học
@@ -110,10 +98,6 @@
       <a href="khoachuyenmon" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fa fa-book fa-inverse mr-3"></i>
         Khoa chuyên môn
-      </a>
-      <a href="nguoidung" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-        <i class="fa fa-user fa-inverse mr-3"></i>
-        Người dùng
       </a>
     </nav>
 
@@ -134,6 +118,7 @@
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã môn học</th>
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên môn học</th>
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Số tín chỉ</th>
+              <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
             </tr>
             </thead>
             <tbody>
@@ -141,6 +126,10 @@
                 <td class="py-4 px-6 border-b border-grey-light" th:text="${monhoc.getMaMH()}">MH001</td>
                 <td class="py-4 px-6 border-b border-grey-light" th:text="${monhoc.getTenMH()}">Toán cơ bản</td>
                 <td class="py-4 px-6 border-b border-grey-light" th:text="${monhoc.getSoTinChi()}" >4</td>
+                <td class="py-4 px-6 border-b border-grey-light">
+                  <button onclick="" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</button>
+                  <button onclick="" class="text-red-500 hover:text-red-700">Xóa</button>
+                </td>
               </tr>
             </tbody>
           </table>

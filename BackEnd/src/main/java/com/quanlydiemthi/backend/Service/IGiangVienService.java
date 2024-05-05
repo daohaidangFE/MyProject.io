@@ -10,4 +10,6 @@ public interface IGiangVienService {
     List<GiangVienDTO> findTeachers(Map<String, String> params);
     void deleteTeacher(String maGV);
     GiangVienDTO createTeacher(GiangVienDTO giangVienDTO);
+    void updateTeacher(GiangVienDTO giangVienDTO);
+    GiangVien findTeacher(String maGV);
 }
