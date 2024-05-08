@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-
+@ToString(exclude = {"sinhvien", "maKH", "maK", "maGV"})
 public class Lop {
     @Id
     private String maLop;

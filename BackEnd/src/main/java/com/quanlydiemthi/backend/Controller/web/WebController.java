@@ -1,0 +1,96 @@
+package com.quanlydiemthi.backend.Controller.web;
+
+import com.quanlydiemthi.backend.Entity.GiangVien;
+import com.quanlydiemthi.backend.Entity.SinhVien;
+import com.quanlydiemthi.backend.Payloads.DiemDTO;
+import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
+import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
+import com.quanlydiemthi.backend.Payloads.UserDTO;
+import com.quanlydiemthi.backend.Repository.GiangVienRepository;
+import com.quanlydiemthi.backend.Service.IGiangVienService;
+import com.quanlydiemthi.backend.Service.ISinhVienService;
+import com.quanlydiemthi.backend.Service.Impl.DiemServiceImpl;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+
+@Controller
+public class WebController {
+    @Autowired
+    private ISinhVienService sinhVienService;
+
+    @Autowired
+    private IGiangVienService giangVienService;
+
+
+    @GetMapping("/home")
+    public String home() {
+        return "/user/sinhvien/indexsv";
+    }
+
+    @GetMapping("/diemthi")
+    public String  getAllDiem(Model model) {
+//        List<DiemDTO> diemDTOList = diemService.findAll();
+//        model.addAttribute("diemtList", diemDTOList);
+        return "/user/sinhvien/diemthi";
+    }
+
+    @GetMapping("/ttcanhan")
+    public String  getTtcanhan(Model model) {
+//        List<DiemDTO> diemDTOList = diemService.findAll();
+//        model.addAttribute("diemtList", diemDTOList);
+        return "/user/sinhvien/ttcanhan";
+    }
+
+    @GetMapping("/")
+    public String loginForm() {
+        return "/public/login";
+    }
+
+    @PostMapping("/login")
+    public String login(UserDTO userDTO, HttpSession session) {
+        if(userDTO.getUsername().startsWith("KM")){
+            GiangVien giangVien = giangVienService.findByUserName(userDTO.getUsername());
+            if (giangVien != null && giangVien.getUsername().equals(userDTO.getUsername()) && giangVien.getPassword().equals(userDTO.getPassword())) {
+                session.setAttribute("loggedInUser", giangVien);
+                return "redirect:/homeGV";
+            } else {
+                return "redirect:/";
+            }
+        }
+        else{
+            SinhVien sinhVien = sinhVienService.findByUsername(userDTO.getUsername());
+            if (sinhVien != null && sinhVien.getUsername().equals(userDTO.getUsername()) && sinhVien.getPassword().equals(userDTO.getPassword())) {
+                session.setAttribute("loggedInUser", sinhVien);
+                return "redirect:/home";
+            } else {
+                return "redirect:/";
+            }
+        }
+    }
+
+    @GetMapping("/homeGV")
+    public String homeGV() {
+        return "/user/giangvien/indexgv";
+    }
+    @GetMapping("/lop")
+    public String  getLop(Model model) {
+//        List<DiemDTO> diemDTOList = diemService.findAll();
+//        model.addAttribute("diemtList", diemDTOList);
+        return "/user/giangvien/lop";
+    }
+
+    @GetMapping("/ttcanhanGV")
+    public String  getTtcanhanGV(Model model) {
+//        List<DiemDTO> diemDTOList = diemService.findAll();
+//        model.addAttribute("diemtList", diemDTOList);
+        return "/user/giangvien/ttcanhan";
+    }
+
+
+}

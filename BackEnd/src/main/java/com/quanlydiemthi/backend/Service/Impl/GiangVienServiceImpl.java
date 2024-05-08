@@ -57,6 +57,11 @@ public class GiangVienServiceImpl implements IGiangVienService {
     }
 
     @Override
+    public GiangVien findByUserName(String userName) {
+        return giangVienRepository.findByMaGV(userName);
+    }
+
+    @Override
     public void updateTeacher(GiangVienDTO giangVienDTO) {
         GiangVien giangVien = giangVienRepository.findByMaGV(giangVienDTO.getMaGV());
         giangVien.setTenGV(giangVienDTO.getTenGV().replaceAll("\s\s+", " ").trim());

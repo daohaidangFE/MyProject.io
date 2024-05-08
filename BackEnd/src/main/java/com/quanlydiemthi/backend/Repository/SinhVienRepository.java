@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SinhVienRepository extends JpaRepository<SinhVien, Integer>, SinhVienRepositoryCustom {
     SinhVien findByMaSV(String maSV);
+    SinhVien findByUsername(String userName);
 }

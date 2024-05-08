@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-
+@ToString(exclude = {"lop"})
 public class KhoaHoc {
     @Id
     private Integer maKH;
@@ -20,7 +20,6 @@ public class KhoaHoc {
     @Column(nullable = false)
     private String tenKH;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "khoahoc",fetch = FetchType.LAZY)
     private List<Lop> lop;
 }
