@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -86,10 +88,28 @@ public class WebController {
     }
 
     @GetMapping("/ttcanhanGV")
-    public String  getTtcanhanGV(Model model) {
-//        List<DiemDTO> diemDTOList = diemService.findAll();
-//        model.addAttribute("diemtList", diemDTOList);
-        return "/user/giangvien/ttcanhan";
+    public String getTtcanhanGV(Model model, HttpSession session) {
+        // Lấy thông tin đăng nhập từ session
+        Object loggedInUser = session.getAttribute("loggedInUser");
+
+        if (loggedInUser != null) {
+
+            String username;
+            if (loggedInUser instanceof GiangVien) {
+
+                GiangVien giangVien = (GiangVien) loggedInUser;
+                username = giangVien.getUsername();
+                GiangVien giangVienlog = giangVienService.findByUserName(username);
+                model.addAttribute("giangVienlog", giangVienlog);
+                return "/user/giangvien/ttcanhan";
+            }  else {
+                return "redirect:/login";
+            }
+            // còn phần else if cho sinh viên nữa
+
+        } else {
+            return "redirect:/login";
+        }
     }
 
 
