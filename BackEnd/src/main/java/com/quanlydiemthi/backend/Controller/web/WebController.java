@@ -43,10 +43,27 @@ public class WebController {
     }
 
     @GetMapping("/ttcanhan")
-    public String  getTtcanhan(Model model) {
-//        List<DiemDTO> diemDTOList = diemService.findAll();
-//        model.addAttribute("diemtList", diemDTOList);
-        return "/user/sinhvien/ttcanhan";
+    public String  getTtcanhan(Model model, HttpSession session) {
+        Object loggedInUser = session.getAttribute("loggedInUser");
+
+        if (loggedInUser != null) {
+
+            String username;
+            if (loggedInUser instanceof SinhVien sinhVien) {
+
+                username = sinhVien.getUsername();
+                SinhVien sinhVienlog = sinhVienService.findByUsername(username);
+                model.addAttribute("sinhVienlog", sinhVienlog);
+                return "/user/sinhvien/ttcanhan";
+            }  else {
+                return "redirect:/";
+            }
+            // còn phần else if cho sinh viên nữa
+
+        } else {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/")
@@ -95,20 +112,19 @@ public class WebController {
         if (loggedInUser != null) {
 
             String username;
-            if (loggedInUser instanceof GiangVien) {
+            if (loggedInUser instanceof GiangVien giangVien) {
 
-                GiangVien giangVien = (GiangVien) loggedInUser;
                 username = giangVien.getUsername();
                 GiangVien giangVienlog = giangVienService.findByUserName(username);
                 model.addAttribute("giangVienlog", giangVienlog);
                 return "/user/giangvien/ttcanhan";
             }  else {
-                return "redirect:/login";
+                return "redirect:/";
             }
             // còn phần else if cho sinh viên nữa
 
         } else {
-            return "redirect:/login";
+            return "redirect:/";
         }
     }
 

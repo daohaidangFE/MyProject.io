@@ -8,11 +8,13 @@ import com.quanlydiemthi.backend.Service.IDiemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class DiemServiceImpl implements IDiemService {
 
     @Autowired
@@ -27,5 +29,10 @@ public class DiemServiceImpl implements IDiemService {
         return diems.stream()
                 .map((diem) -> this.modelMapper.map(diem,DiemDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public DiemDTO findByMaSV(String maSV) {
+        return null;
     }
 }

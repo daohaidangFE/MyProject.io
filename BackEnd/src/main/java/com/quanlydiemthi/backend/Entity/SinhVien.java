@@ -37,6 +37,9 @@ public class SinhVien {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String GPA;
+
     @OneToMany(mappedBy = "sinhvien",fetch = FetchType.LAZY)
     private List<Diem> diem;
 

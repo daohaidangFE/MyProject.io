@@ -2,6 +2,7 @@ package com.quanlydiemthi.backend.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,12 +30,12 @@ public class Diem {
     @Column(nullable = false)
     private Float diemTongKet;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("diem")
     @ManyToOne
     @JoinColumn(name="maSV")
     private SinhVien sinhvien;
 
-    @JsonIgnore
+    @JsonIgnoreProperties("diem")
     @ManyToOne
     @JoinColumn(name="maMH")
     private MonHoc monhoc;

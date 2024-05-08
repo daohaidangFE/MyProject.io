@@ -96,44 +96,40 @@
                     </h3>
                 </div>
                 <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-                    <dl class="sm:divide-y sm:divide-gray-200">
+                    <dl th:each="sinhVienlog : ${sinhVienlog}" class="sm:divide-y sm:divide-gray-200">
                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-500">
+                            <dt class="text-sm font-medium text-gray-500" >
                                 Mã sinh viên
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                SV001
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getMaSV()}">
                             </dd>
                         </div>
                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                                 Tên sinh viên
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                Sinh Viên Một
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getTenSV()}">
                             </dd>
                         </div>
                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                                 Tên tài khoản
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                sinhvienmot23
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getUsername()}">
                             </dd>
                         </div>
                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
-                                Phone number
+                                Email
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                0911608046
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getEmail()}">
                             </dd>
                         </div>
                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
-                                Address
+                                Lớp
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getLop()}">
                                 Hà Đông, Hà Nội, Việt Nam
                             </dd>
                         </div>
