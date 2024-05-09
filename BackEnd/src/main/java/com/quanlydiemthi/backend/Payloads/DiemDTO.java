@@ -18,7 +18,7 @@ public class DiemDTO {
 
     private Float diemCuoiKy;
 
-    private Float diemTongKet;
+    private Float diemTongKet = (float) (diemGiuaKy*0.3 + diemCuoiKy*0.7);
 
     private SinhVien sinhvien;
 

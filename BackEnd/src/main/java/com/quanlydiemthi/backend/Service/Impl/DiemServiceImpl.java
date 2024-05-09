@@ -2,6 +2,7 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 
 import com.quanlydiemthi.backend.Entity.Diem;
+import com.quanlydiemthi.backend.Entity.MonHoc;
 import com.quanlydiemthi.backend.Payloads.DiemDTO;
 import com.quanlydiemthi.backend.Repository.DiemRepository;
 import com.quanlydiemthi.backend.Service.IDiemService;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class DiemServiceImpl implements IDiemService {
+    @Autowired
     private DiemRepository diemRepository;
 
     @Autowired
@@ -39,5 +41,10 @@ public class DiemServiceImpl implements IDiemService {
     @Override
     public DiemDTO findByMaSV(String maSV) {
         return null;
+    }
+
+    @Override
+    public void deleteDiem(Integer Id) {
+        diemRepository.deleteById(Id);
     }
 }

@@ -94,8 +94,8 @@
                 <table class="table-auto w-full border-collapse border border-gray-300 bg-white">
                     <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2 text-center">STT</th>
-                        <th class="px-4 py-2">Tên học phần</th>
+                        <th class="px-4 py-2 text-center">Mã học phần</th>
+                        <th class="px-4 py-2 text-center">Tên học phần</th>
                         <th class="px-4 py-2 text-center">Số tín chỉ</th>
                         <th class="px-4 py-2 text-center">Tổng kết (hệ 10)</th>
                         <th class="px-4 py-2 text-center">Tổng kết (hệ 4)</th>
@@ -103,32 +103,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="diem : ${diemtList}">
-                        <td class="px-4 py-2 text-center" th:text="${diem.getId()}">1</td>
-                        <td class="px-4 py-2" th:text="${diem.getMonhoc()}">Môn A</td>
-                        <td class="px-4 py-2 text-center" th:text="${diem.getDiemGiuaKy()}">3</td>
-                        <td class="px-4 py-2 text-center" th:text="${diem.getDiemCuoiKy()}">8.2</td>
-                        <td class="px-4 py-2 text-center" th:text="${diem.getDiemTongKet()}">3.5</td>
-                        <td class="px-4 py-2 text-center" th:text="${diem.getHocKy()}">B+</td>
-                    </tr>
-<!--                    <tr>-->
-<!--                        <td class="px-4 py-2 text-center">2</td>-->
-<!--                        <td class="px-4 py-2">Môn B</td>-->
-<!--                        <td class="px-4 py-2 text-center">4</td>-->
-<!--                        <td class="px-4 py-2 text-center">7.6</td>-->
-<!--                        <td class="px-4 py-2 text-center">3</td>-->
-<!--                        <td class="px-4 py-2 text-center">B</td>-->
-<!--                    </tr>-->
-
-
-
+                        <tr>
+                            <td class="px-4 py-2 text-center" ></td>
+                            <td class="px-4 py-2 text-center" ></td>
+                            <td class="px-4 py-2 text-center" ></td>
+                            <td class="px-4 py-2 text-center" ></td>
+                            <td class="px-4 py-2 text-center" ></td>
+                            <td class="px-4 py-2 text-center" ></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-
         </main>
     </div>
-
 </div>
 
 <!-- AlpineJS -->

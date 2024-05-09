@@ -41,7 +41,7 @@ public class SinhVienServiceImpl implements ISinhVienService {
     @Override
     public SinhVienDTO createStudent(SinhVienDTO sinhVienDTO) {
         SinhVien sinhVien = new SinhVien();
-        sinhVien.setMaSV(sinhVienDTO.getMaSV().replaceAll("\s\s+", " ").trim());
+        sinhVien.setMaSV(sinhVienDTO.getMaSV().replaceAll("\s\s+", "").trim());
         sinhVien.setActive(true);
         sinhVien.setTenSV(sinhVienDTO.getTenSV().replaceAll("\s\s+", " ").trim());
         sinhVien.setGioiTinh(sinhVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());

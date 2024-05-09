@@ -203,12 +203,25 @@
 
 
 <script>
+    function validateForm() {
+        var masv = document.getElementById('masv').value;
+        var tensv = document.getElementById('tensv').value;
+        var gioiTinh = document.getElementById('gioi_tinh').value;
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+
+        if (masv == '' || tensv == '' || gioiTinh == '' || username == '' || email == '') {
+            alert('Vui lòng điền đầy đủ thông tin vào các trường.');
+            return false;
+        }
+        return true;
+    }
     //sửa sv
     var isEditing = false;
     function editStudent(element) {
         var maSV = element.getAttribute('data-maSV');
 
-        isEditing = true
+        isEditing = true;
         fetch('/api/sinhvien/' + maSV)
             .then(response => response.json())
             .then(data => {
@@ -230,6 +243,7 @@
 
                 toggleAddForm();
             })
+
             .catch(error => console.error('Có lỗi xảy ra:', error));
     }
 

@@ -24,12 +24,6 @@ public class MonHocController {
         return "/dashboard/ttmonhoc";
     }
 
-    @GetMapping("/api/monhoc/{id}")
-    public ResponseEntity<?> getMonHocById(@PathVariable Integer id) {
-        MonHocDTO monHocDTO = monHocService.findMonHocById(id);
-        return ResponseEntity.ok(monHocDTO);
-    }
-
     @GetMapping("/api/monhoc/searchbyname")
     public ResponseEntity<?> getMonHocByName(@RequestParam String searchValue) {
         List<MonHocDTO> monHocDTOList = monHocService.searchMonHocByTenMH(searchValue.replaceAll("\s\s+", " ").trim());

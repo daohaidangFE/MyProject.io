@@ -2,7 +2,9 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 import com.quanlydiemthi.backend.Entity.MonHoc;
 import com.quanlydiemthi.backend.Exceptions.NotFoundException;
+import com.quanlydiemthi.backend.Payloads.DiemDTO;
 import com.quanlydiemthi.backend.Payloads.MonHocDTO;
+import com.quanlydiemthi.backend.Repository.DiemRepository;
 import com.quanlydiemthi.backend.Repository.MonHocRepository;
 import com.quanlydiemthi.backend.Service.IMonHocService;
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,9 @@ public class MonHocServiceImpl implements IMonHocService {
     private MonHocRepository monHocRepository;
 
     @Autowired
+    private DiemRepository diemRepository;
+
+    @Autowired
     public ModelMapper modelMapper;
 
     @Override
@@ -32,16 +37,34 @@ public class MonHocServiceImpl implements IMonHocService {
     }
 
     @Override
-    public MonHocDTO findMonHocById(Integer Id) {
-        MonHoc monHocList = monHocRepository.findById(Id).orElseThrow(() -> new NotFoundException("mon hoc", "Id", Id));
-        return this.modelMapper.map(monHocList, MonHocDTO.class);
-    }
-
-    @Override
     public List<MonHocDTO> searchMonHocByTenMH(String tenMH) {
         List<MonHoc> monHocList = monHocRepository.findAllByTenMHContainingIgnoreCase(tenMH);
         return monHocList.stream()
                 .map((monhoc) -> this.modelMapper.map(monhoc, MonHocDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public MonHocDTO createMonHoc(MonHocDTO monHocDTO) {
+        MonHoc monHoc = new MonHoc();
+        monHoc.setMaMH(monHocDTO.getMaMH().replaceAll("\s\s+", "").trim());
+        monHoc.setTenMH(monHocDTO.getTenMH().replaceAll("\s\s+", " ").trim());
+        monHoc.setSoTinChi(monHocDTO.getSoTinChi());
+        monHocRepository.save(monHoc);
+        return this.modelMapper.map(monHoc, MonHocDTO.class);
+    }
+
+    @Override
+    public MonHoc findMonHoc(String maMH) {
+        return monHocRepository.findByMaMH(maMH);
+    }
+
+    @Override
+    public MonHocDTO updateMonHoc(MonHocDTO monHocDTO) {
+        MonHoc monHoc = monHocRepository.findByMaMH(monHocDTO.getMaMH());
+        monHoc.setTenMH(monHocDTO.getTenMH().replaceAll("\s\s+", " ").trim());
+        monHoc.setSoTinChi(monHocDTO.getSoTinChi());
+        monHocRepository.save(monHoc);
+        return this.modelMapper.map(monHoc, MonHocDTO.class);
     }
 }
