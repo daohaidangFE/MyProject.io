@@ -27,9 +27,6 @@ public class Diem {
     @Column(nullable = false)
     private Float diemCuoiKy;
 
-    @Column(nullable = false)
-    private Float diemTongKet;
-
     @JsonIgnoreProperties("diem")
     @ManyToOne
     @JoinColumn(name="maSV")
@@ -39,4 +36,5 @@ public class Diem {
     @ManyToOne
     @JoinColumn(name="maMH")
     private MonHoc monhoc;
+
 }

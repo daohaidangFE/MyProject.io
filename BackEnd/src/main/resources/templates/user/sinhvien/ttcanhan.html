@@ -70,7 +70,7 @@
 
         <!-- Dropdown Nav -->
         <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-            <a href="home" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <a href="home" class="flex items-center  text-white py-4 pl-6 nav-item opacity-75 hover:opacity-100">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Trang chủ
             </a>
@@ -78,7 +78,7 @@
                 <i class="fa fa-info fa-inverse mr-3"></i>
                 Điểm thi
             </a>
-            <a href="ttcanhan" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="ttcanhan" class="active-nav-link flex items-center text-white py-4 pl-6 nav-item">
                 <i class="fa fa-table fa-inverse mr-3"></i>
                 Thông tin cá nhân
             </a>
@@ -129,8 +129,7 @@
                             <dt class="text-sm font-medium text-gray-500">
                                 Lớp
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getLop()}">
-                                Hà Đông, Hà Nội, Việt Nam
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" th:text="${sinhVienlog.getLop().getTenLop()}">
                             </dd>
                         </div>
                     </dl>

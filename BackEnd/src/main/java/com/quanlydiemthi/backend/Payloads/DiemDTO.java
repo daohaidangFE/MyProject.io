@@ -1,11 +1,7 @@
 package com.quanlydiemthi.backend.Payloads;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quanlydiemthi.backend.Entity.MonHoc;
 import com.quanlydiemthi.backend.Entity.SinhVien;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 @NoArgsConstructor

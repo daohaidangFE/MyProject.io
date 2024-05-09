@@ -47,7 +47,7 @@ public class SinhVienServiceImpl implements ISinhVienService {
         sinhVien.setGioiTinh(sinhVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
         sinhVien.setUsername(sinhVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
         sinhVien.setPassword(sinhVienDTO.getPassword().replaceAll("\s\s+", " ").trim());
-//        sinhVien.setEmail(sinhVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
+        sinhVien.setEmail(sinhVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
         sinhvienRepository.save(sinhVien);
         return this.modelMapper.map(sinhVien, SinhVienDTO.class);
     }
@@ -63,13 +63,13 @@ public class SinhVienServiceImpl implements ISinhVienService {
         sinhVien.setTenSV(sinhVienDTO.getTenSV().replaceAll("\s\s+", " ").trim());
         sinhVien.setGioiTinh(sinhVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
         sinhVien.setUsername(sinhVienDTO.getUsername().replaceAll("\s\s+", " ").trim());
-//        sinhVien.setEmail(sinhVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
+        sinhVien.setEmail(sinhVienDTO.getEmail().replaceAll("\s\s+", " ").trim());
         sinhvienRepository.save(sinhVien);
         this.modelMapper.map(sinhVien, SinhVienDTO.class);
     }
 
     @Override
     public SinhVien findByUsername(String userName) {
-        return sinhvienRepository.findByUsername(userName);
+        return sinhvienRepository.findByMaSV(userName);
     }
 }

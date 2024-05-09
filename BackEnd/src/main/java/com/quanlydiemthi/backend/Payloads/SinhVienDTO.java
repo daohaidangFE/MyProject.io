@@ -37,9 +37,4 @@ public class SinhVienDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
 
-    private Double GPA;
-//    @JsonIgnore
-//    private Lop lop;
-
-
 }

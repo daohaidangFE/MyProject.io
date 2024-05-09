@@ -26,15 +26,15 @@
         <a href="homeGV" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Quản lý điểm thi</a>
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-        <a href="homeGV" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+        <a href="homeGV" class="flex items-center text-white py-4 pl-6 nav-item opacity-75 hover:opacity-100 ">
             <i class="fas fa-tachometer-alt mr-3"></i>
             Trang chủ
         </a>
-        <a href="lop" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="lop" class="active-nav-link flex items-center text-white py-4 pl-6 nav-item">
             <i class="fa fa-user-graduate mr-3 fa-inverse"></i>
             Lớp
         </a>
-        <a href="ttcanhanGV" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        <a href="ttcanhanGV" class="flex items-center text-white py-4 pl-6 nav-item opacity-75 hover:opacity-100 ">
             <i class="fa fa-info fa-inverse mr-3"></i>
             Thông tin cá nhân
         </a>
@@ -71,11 +71,11 @@
 
         <!-- Dropdown Nav -->
         <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-            <a href="homeGV" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <a href="homeGV" class="flex items-center text-white py-4 pl-6 nav-item opacity-75 hover:opacity-100">
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 Trang chủ
             </a>
-            <a href="lop" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="lop" class="active-nav-link flex items-center text-white py-4 pl-6 nav-item">
                 <i class="fa fa-info fa-inverse mr-3"></i>
                 Lớp
             </a>
@@ -90,79 +90,36 @@
     <div class="w-full overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
             <h1 class="text-3xl text-black pb-6">Xin chào!</h1>
-
             <div class="w-full mt-12">
                 <p class="text-xl pb-3 flex items-center">
-                    <i class="fas fa-list mr-3"></i> Danh sách lớp
+                    <i class="fas fa-list mr-3"></i>
+                    <h2 class="text-xl text-black pb-6" th:text="${giangVienlog.getLop().getTenLop()}"></h2>
                 </p>
-                <div class="bg-white overflow-auto">
+                <div th:each="giangVienlog : ${giangVienlog}" class="bg-white overflow-auto">
                     <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
                         <thead>
                         <tr>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã lớp</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên lớp</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã khoa</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên khoa</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Xem chi tiết</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã sinh viên</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên sinh viên</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tài khoản</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Email</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <!-- Dòng 1 -->
                         <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L001</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp A</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 2 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L002</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp B</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 3 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L003</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp C</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 4 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L004</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp D</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 5 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L005</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp E</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 6 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L006</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp F</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
-                        </tr>
-                        <!-- Dòng 7 -->
-                        <tr class="hover:bg-gray-200">
-                            <td class="py-4 px-6 border-b border-gray-200">L007</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Lớp G</td>
-                            <td class="py-4 px-6 border-b border-gray-200">1</td>
-                            <td class="py-4 px-6 border-b border-gray-200">Công nghệ thông tin 1</td>
-                            <td class="py-4 px-6 border-b border-gray-200"><a href="#" class="hover:underline">Chi tiết</a></td>
+                            <td class="py-4 px-6 border-b border-gray-200"></td>
+                            <td class="py-4 px-6 border-b border-gray-200"></td>
+                            <td class="py-4 px-6 border-b border-gray-200"></td>
+                            <td class="py-4 px-6 border-b border-gray-200"></td>
+                            <td class="py-4 px-6 border-b border-gray-200"></td>
+                            <td class="py-4 px-6 border-b border-gray-200">
+                                <button class="text-blue-500 hover:text-blue-700 mr-2" >Sửa</button>
+                                <button class="text-red-500 hover:text-red-700" >Xóa</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

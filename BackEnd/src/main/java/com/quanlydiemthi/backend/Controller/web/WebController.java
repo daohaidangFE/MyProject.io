@@ -97,12 +97,6 @@ public class WebController {
     public String homeGV() {
         return "/user/giangvien/indexgv";
     }
-    @GetMapping("/lop")
-    public String  getLop(Model model) {
-//        List<DiemDTO> diemDTOList = diemService.findAll();
-//        model.addAttribute("diemtList", diemDTOList);
-        return "/user/giangvien/lop";
-    }
 
     @GetMapping("/ttcanhanGV")
     public String getTtcanhanGV(Model model, HttpSession session) {
@@ -118,15 +112,31 @@ public class WebController {
                 GiangVien giangVienlog = giangVienService.findByUserName(username);
                 model.addAttribute("giangVienlog", giangVienlog);
                 return "/user/giangvien/ttcanhan";
-            }  else {
+            }
+            else {
                 return "redirect:/";
             }
-            // còn phần else if cho sinh viên nữa
-
         } else {
             return "redirect:/";
         }
     }
 
+    @GetMapping("/lop")
+    public String getLopOfGiangVien(Model model, HttpSession session) {
+        Object loggedInUser = session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            String username;
+            if (loggedInUser instanceof GiangVien giangVien) {
+                username = giangVien.getUsername();
+                GiangVien giangVienlog = giangVienService.findByUserName(username);
+                model.addAttribute("giangVienlog", giangVienlog);
+                return "/user/giangvien/lop";
 
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+    }
 }
