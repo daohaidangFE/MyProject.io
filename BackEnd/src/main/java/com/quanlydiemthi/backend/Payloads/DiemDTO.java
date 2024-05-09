@@ -12,15 +12,11 @@ import lombok.*;
 public class DiemDTO {
     private Integer id;
 
-    private String hocKy;
+    private String tenHocPhan;
 
-    private Float diemGiuaKy;
+    private Float diemTongKet;
 
-    private Float diemCuoiKy;
-
-    private Float diemTongKet = (float) (diemGiuaKy*0.3 + diemCuoiKy*0.7);
-
-    private SinhVien sinhvien;
-
-    private MonHoc monhoc;
+    private Float diemHe4;
+    private String diemChu;
+    private int soTinChi;
 }

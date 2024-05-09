@@ -48,7 +48,7 @@ public class WebController {
         Object loggedInUser = session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
             if (loggedInUser instanceof SinhVien sinhVien) {
-                List<DiemDTO> diemDTOList = diemService.findByMaSV(sinhVien.getMaSV());
+                List<DiemDTO> diemDTOList = diemService.findAll(sinhVien.getMaSV());
                 model.addAttribute("diemtList", diemDTOList);
                 return "/user/sinhvien/diemthi";
             }

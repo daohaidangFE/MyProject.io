@@ -94,7 +94,7 @@
                 <table class="table-auto w-full border-collapse border border-gray-300 bg-white">
                     <thead>
                     <tr class="bg-gray-100">
-                        <th class="px-4 py-2 text-center">Mã học phần</th>
+                        <th class="px-4 py-2 text-center">STT</th>
                         <th class="px-4 py-2 text-center">Tên học phần</th>
                         <th class="px-4 py-2 text-center">Số tín chỉ</th>
                         <th class="px-4 py-2 text-center">Tổng kết (hệ 10)</th>
@@ -103,13 +103,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="px-4 py-2 text-center" ></td>
-                            <td class="px-4 py-2 text-center" ></td>
-                            <td class="px-4 py-2 text-center" ></td>
-                            <td class="px-4 py-2 text-center" ></td>
-                            <td class="px-4 py-2 text-center" ></td>
-                            <td class="px-4 py-2 text-center" ></td>
+                        <tr th:each="diem : ${diemtList}">
+                            <td class="px-4 py-2 text-center" th:text="${diem.getId()}"></td>
+                            <td class="px-4 py-2 text-center" th:text="${diem.getTenHocPhan()}"></td>
+                            <td class="px-4 py-2 text-center" th:text="${diem.getSoTinChi()}"></td>
+                            <td class="px-4 py-2 text-center" th:text="${diem.getDiemTongKet()}"></td>
+                            <td class="px-4 py-2 text-center" th:text="${diem.getDiemHe4()}"></td>
+                            <td class="px-4 py-2 text-center" th:text="${diem.getDiemChu()}"></td>
                         </tr>
                     </tbody>
                 </table>
