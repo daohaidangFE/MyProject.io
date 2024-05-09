@@ -182,4 +182,22 @@ public class WebController {
             return "redirect:/";
         }
     }
+
+    // @GetMapping("/lop")
+    // public String getAllSinhVien(@RequestParam Map<String, String> params, Model model, HttpSession session) {
+    //     Object loggedInUser = session.getAttribute("loggedInUser");
+    //     if (loggedInUser != null) {
+    //         String username;
+    //         if (loggedInUser instanceof GiangVien giangVien) {
+    //             username = giangVien.getUsername();
+    //             GiangVien giangVienlog = giangVienService.findByUserName(username);
+    //             params.put("maGV", giangVienlog.getMaGV());
+    //             List<SinhVienDTO> sinhVienDTOList = sinhVienService.findStudents(params);
+    //             model.addAttribute("sinhVienDTOList", sinhVienDTOList);
+    //             model.addAttribute("giangVienlog", giangVienlog);
+    //         }
+    //     }
+
+    //     return "/user/giangvien/lop";
+    // }
 }
