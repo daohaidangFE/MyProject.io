@@ -27,7 +27,18 @@ public class KhoaServiceImpl implements IKhoaService {
     public List<KhoaDTO> findAll() {
         List<Khoa> khoaList = khoaRepository.findAll();
         return khoaList.stream()
-                .map((khoa) -> this.modelMapper.map(khoa, KhoaDTO.class))
+                .map((khoa) ->{
+                    KhoaDTO khoaDTO = modelMapper.map(khoa, KhoaDTO.class);
+                    String str = "";
+                    for (int i = 0;i < khoaDTO.getLop().size() ;i++){
+                        str = str + khoaDTO.getLop().get(i).getTenLop();
+                        if(i < khoaDTO.getLop().size() - 1){
+                            str = str + ", ";
+                        }
+                    }
+                    khoaDTO.setDsLop(str);
+                    return khoaDTO;
+                })
                 .collect(Collectors.toList());
     }
 

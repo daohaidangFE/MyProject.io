@@ -19,4 +19,5 @@ public class KhoaDTO {
     private String tenK;
 
     private List<Lop> lop;
+    private String dsLop;
 }
