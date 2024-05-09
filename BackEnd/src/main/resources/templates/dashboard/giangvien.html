@@ -144,7 +144,7 @@
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Giới tính</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên tài khoản</th>
                             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Email</th>
-                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
+                            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light" th:if="${giangVienlog.getRole().getRole() == 'admin'}">Thao tác</th>
 
                         </tr>
                         </thead>
@@ -157,8 +157,12 @@
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getUsername()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light" th:text="${giangVien.getEmail()}"></td>
                                 <td class="py-4 px-6 border-b border-grey-light">
-                                    <a href="#" class="text-blue-500 hover:text-blue-700 mr-2" onclick="editTeacher(this)" th:attr="data-maGV=${giangVien.maGV}">Sửa</a>
-                                    <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
+                                    <div th:if="${giangVienlog.getRole().getRole() == 'admin'}">
+                                        <!-- Hiển thị nút Sửa -->
+                                        <a href="#" class="text-blue-500 hover:text-blue-700 mr-2" onclick="editTeacher(this)" th:attr="data-maGV=${giangVien.maGV}">Sửa</a>
+                                        <!-- Hiển thị nút Xóa -->
+                                        <a href="#" class="text-red-500 hover:text-red-700" onclick="confirmDelete(this)">Xóa</a>
+                                    </div>
                             </tr>
                         </tbody>
                     </table>

@@ -119,7 +119,7 @@
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mã môn học</th>
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên môn học</th>
               <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Số tín chỉ</th>
-              <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Thao tác</th>
+              <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light" th:if="${giangVienlog.getRole().getRole() == 'admin'}">Thao tác</th>
             </tr>
             </thead>
             <tbody>
@@ -128,8 +128,10 @@
                 <td class="py-4 px-6 border-b border-grey-light" th:text="${monhoc.getTenMH()}"></td>
                 <td class="py-4 px-6 border-b border-grey-light" th:text="${monhoc.getSoTinChi()}"></td>
                 <td class="py-4 px-6 border-b border-grey-light">
-                  <button onclick="editMonHoc(this)" th:attr="data-maMH=${monhoc.maMH}" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</button>
-                  <button onclick="confirmDelete(this)" class="text-red-500 hover:text-red-700">Xóa</button>
+                  <div th:if="${giangVienlog.getRole().getRole() == 'admin'}">
+                    <button onclick="editMonHoc(this)" th:attr="data-maMH=${monhoc.maMH}" class="text-blue-500 hover:text-blue-700 mr-2">Sửa</button>
+                    <button onclick="confirmDelete(this)" class="text-red-500 hover:text-red-700">Xóa</button>
+                  </div>
                 </td>
               </tr>
             </tbody>

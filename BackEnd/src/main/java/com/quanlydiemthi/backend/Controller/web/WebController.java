@@ -67,6 +67,15 @@ public class WebController {
                 return "redirect:/";
             }
         }
+        else if (userDTO.getUsername().startsWith("ADMIN")){
+            GiangVien giangVien = giangVienService.findByUserName(userDTO.getUsername());
+            if (giangVien != null && giangVien.getUsername().equals(userDTO.getUsername()) && giangVien.getPassword().equals(userDTO.getPassword()) && giangVien.getRole().getRole().equals("admin")) {
+                session.setAttribute("loggedInUser", giangVien);
+                return "redirect:/admin";
+            } else {
+                return "redirect:/";
+            }
+        }
         else{
             SinhVien sinhVien = sinhVienService.findByUsername(userDTO.getUsername());
             if (sinhVien != null && sinhVien.getUsername().equals(userDTO.getUsername()) && sinhVien.getPassword().equals(userDTO.getPassword())) {

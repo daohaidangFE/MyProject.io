@@ -38,6 +38,7 @@ public class GiangVien {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "giangVien")
     private Lop lop;
 }

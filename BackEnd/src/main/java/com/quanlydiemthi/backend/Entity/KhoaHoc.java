@@ -20,6 +20,7 @@ public class KhoaHoc {
     @Column(nullable = false)
     private String tenKH;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "khoahoc",fetch = FetchType.LAZY)
     private List<Lop> lop;
 }
