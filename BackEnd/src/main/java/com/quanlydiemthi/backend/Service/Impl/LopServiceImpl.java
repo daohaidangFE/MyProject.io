@@ -2,9 +2,11 @@ package com.quanlydiemthi.backend.Service.Impl;
 
 
 import com.quanlydiemthi.backend.Entity.Lop;
+import com.quanlydiemthi.backend.Entity.SinhVien;
 import com.quanlydiemthi.backend.Exceptions.NotFoundException;
 import com.quanlydiemthi.backend.Payloads.LopDTO;
 import com.quanlydiemthi.backend.Repository.LopRepository;
+import com.quanlydiemthi.backend.Repository.SinhVienRepository;
 import com.quanlydiemthi.backend.Service.ILopService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 public class LopServiceImpl implements ILopService {
     @Autowired
     private LopRepository lopRepository;
+
+    @Autowired
+    private SinhVienRepository sinhVienRepository;
 
     @Autowired
     public ModelMapper modelMapper;
@@ -44,4 +49,8 @@ public class LopServiceImpl implements ILopService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<SinhVien> findAllSinhVienByLop(String maLop) {
+        return sinhVienRepository.findByLop_MaLop(maLop);
+    }
 }

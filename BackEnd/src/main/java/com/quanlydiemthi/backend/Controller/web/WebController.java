@@ -7,7 +7,9 @@ import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
 import com.quanlydiemthi.backend.Payloads.SinhVienDTO;
 import com.quanlydiemthi.backend.Payloads.UserDTO;
 import com.quanlydiemthi.backend.Repository.GiangVienRepository;
+import com.quanlydiemthi.backend.Service.IDiemService;
 import com.quanlydiemthi.backend.Service.IGiangVienService;
+import com.quanlydiemthi.backend.Service.ILopService;
 import com.quanlydiemthi.backend.Service.ISinhVienService;
 import com.quanlydiemthi.backend.Service.Impl.DiemServiceImpl;
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +31,12 @@ public class WebController {
     @Autowired
     private IGiangVienService giangVienService;
 
+    @Autowired
+    private ILopService lopService;
+
+    @Autowired
+    private IDiemService diemService;
+
 
     @GetMapping("/home")
     public String home() {
@@ -36,10 +44,21 @@ public class WebController {
     }
 
     @GetMapping("/diemthi")
-    public String  getAllDiem(Model model) {
-//        List<DiemDTO> diemDTOList = diemService.findAll();
-//        model.addAttribute("diemtList", diemDTOList);
-        return "/user/sinhvien/diemthi";
+    public String  getAllDiem(Model model, HttpSession session) {
+        Object loggedInUser = session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            if (loggedInUser instanceof SinhVien sinhVien) {
+                List<DiemDTO> diemDTOList = diemService.findByMaSV(sinhVien.getMaSV());
+                model.addAttribute("diemtList", diemDTOList);
+                return "/user/sinhvien/diemthi";
+            }
+            else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
     }
 
     @GetMapping("/ttcanhan")
@@ -125,10 +144,10 @@ public class WebController {
     public String getLopOfGiangVien(Model model, HttpSession session) {
         Object loggedInUser = session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
-            String username;
             if (loggedInUser instanceof GiangVien giangVien) {
-                username = giangVien.getUsername();
-                GiangVien giangVienlog = giangVienService.findByUserName(username);
+                List<SinhVien> sinhVienList = lopService.findAllSinhVienByLop(giangVien.getLop().getMaLop());
+                GiangVien giangVienlog = giangVienService.findByUserName(giangVien.getUsername());
+                model.addAttribute("sinhVienList", sinhVienList);
                 model.addAttribute("giangVienlog", giangVienlog);
                 return "/user/giangvien/lop";
 
