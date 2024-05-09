@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Controller.web;
 
+import com.quanlydiemthi.backend.Entity.Diem;
 import com.quanlydiemthi.backend.Entity.GiangVien;
 import com.quanlydiemthi.backend.Entity.SinhVien;
 import com.quanlydiemthi.backend.Payloads.DiemDTO;
@@ -14,6 +15,7 @@ import com.quanlydiemthi.backend.Service.ISinhVienService;
 import com.quanlydiemthi.backend.Service.Impl.DiemServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class WebController {
@@ -43,46 +46,9 @@ public class WebController {
         return "/user/sinhvien/indexsv";
     }
 
-    @GetMapping("/diemthi")
-    public String  getAllDiem(Model model, HttpSession session) {
-        Object loggedInUser = session.getAttribute("loggedInUser");
-        if (loggedInUser != null) {
-            if (loggedInUser instanceof SinhVien sinhVien) {
-                List<DiemDTO> diemDTOList = diemService.findAll(sinhVien.getMaSV());
-                model.addAttribute("diemtList", diemDTOList);
-                return "/user/sinhvien/diemthi";
-            }
-            else {
-                return "redirect:/";
-            }
-        } else {
-            return "redirect:/";
-        }
-
-    }
-
-    @GetMapping("/ttcanhan")
-    public String  getTtcanhan(Model model, HttpSession session) {
-        Object loggedInUser = session.getAttribute("loggedInUser");
-
-        if (loggedInUser != null) {
-
-            String username;
-            if (loggedInUser instanceof SinhVien sinhVien) {
-
-                username = sinhVien.getUsername();
-                SinhVien sinhVienlog = sinhVienService.findByUsername(username);
-                model.addAttribute("sinhVienlog", sinhVienlog);
-                return "/user/sinhvien/ttcanhan";
-            }  else {
-                return "redirect:/";
-            }
-            // còn phần else if cho sinh viên nữa
-
-        } else {
-            return "redirect:/";
-        }
-
+    @GetMapping("/homeGV")
+    public String homeGV() {
+        return "/user/giangvien/indexgv";
     }
 
     @GetMapping("/")
@@ -112,11 +78,59 @@ public class WebController {
         }
     }
 
-    @GetMapping("/homeGV")
-    public String homeGV() {
-        return "/user/giangvien/indexgv";
+    //xem điểm của sinh viên
+    @GetMapping("/diemthi")
+    public String  getAllDiem(Model model, HttpSession session) {
+        Object loggedInUser = session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            if (loggedInUser instanceof SinhVien sinhVien) {
+                List<DiemDTO> diemDTOList = diemService.findAll(sinhVien.getMaSV());
+                model.addAttribute("diemtList", diemDTOList);
+                return "/user/sinhvien/diemthi";
+            }
+            else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
     }
 
+    //xem điểm chi tiết
+    @GetMapping("/diemthi/{Id}")
+    public ResponseEntity<Diem> getDiembyId(@PathVariable Integer Id) {
+        Diem diem = diemService.findDiem(Id);
+        if (diem != null) {
+            return ResponseEntity.ok(diem);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //xem ttcn của sinh viên
+    @GetMapping("/ttcanhan")
+    public String getTtcanhan(Model model, HttpSession session) {
+        Object loggedInUser = session.getAttribute("loggedInUser");
+
+        if (loggedInUser != null) {
+
+            String username;
+            if (loggedInUser instanceof SinhVien sinhVien) {
+
+                username = sinhVien.getUsername();
+                SinhVien sinhVienlog = sinhVienService.findByUsername(username);
+                model.addAttribute("sinhVienlog", sinhVienlog);
+                return "/user/sinhvien/ttcanhan";
+            }  else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
+    }
+
+    //xem ttcn cuả giảng viên
     @GetMapping("/ttcanhanGV")
     public String getTtcanhanGV(Model model, HttpSession session) {
         // Lấy thông tin đăng nhập từ session
@@ -140,6 +154,7 @@ public class WebController {
         }
     }
 
+    //xem danh sách sinh viên trong lớp của giảng viên
     @GetMapping("/lop")
     public String getLopOfGiangVien(Model model, HttpSession session) {
         Object loggedInUser = session.getAttribute("loggedInUser");

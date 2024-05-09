@@ -12,5 +12,7 @@ import java.util.List;
 public interface DiemRepository extends JpaRepository<Diem, Integer> {
     @Query("SELECT d FROM Diem d WHERE d.sinhvien.maSV = :maSV")
     List<Diem> findByMaSV(String maSV);
+    Diem findByid(Integer id);
+
 }
 

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -111,8 +112,12 @@ public class DiemServiceImpl implements IDiemService {
     }
 
     @Override
-    public DiemDTO findByMaSV(String maSV) {
+    public List<DiemDTO> findByMaSV(String maSV) {
         return null;
+    }
+    @Override
+    public Diem findDiem(Integer id) {
+        return diemRepository.findByid(id);
     }
 
     @Override

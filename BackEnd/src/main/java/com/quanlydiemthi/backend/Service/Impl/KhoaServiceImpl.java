@@ -36,6 +36,9 @@ public class KhoaServiceImpl implements IKhoaService {
                             str = str + ", ";
                         }
                     }
+                    if(str == null || str.equals("")) {
+                        str ="Chưa có lớp";
+                    }
                     khoaDTO.setDsLop(str);
                     return khoaDTO;
                 })

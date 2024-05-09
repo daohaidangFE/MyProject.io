@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface IDiemService {
     List<DiemDTO> findAll(String maSV);
-    DiemDTO findByMaSV(String maSV);
+    List<DiemDTO> findByMaSV(String maSV);
     void deleteDiem(Integer Id);
+    Diem findDiem(Integer Id);
 }
