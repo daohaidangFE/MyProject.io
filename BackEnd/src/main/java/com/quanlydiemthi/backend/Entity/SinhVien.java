@@ -16,7 +16,6 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString(exclude = {"diem", "lop"})
-
 public class SinhVien {
     @Id
     private String maSV;

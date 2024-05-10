@@ -36,8 +36,12 @@ public class SinhVienDTO {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
+
     private String tenLop;
+
     private Lop lop;
+
     private String maLop;
+
     private Diem diem;
 }

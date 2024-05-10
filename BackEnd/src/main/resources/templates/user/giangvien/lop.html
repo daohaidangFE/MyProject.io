@@ -131,16 +131,16 @@
                         </thead>
                         <tbody>
                         <!-- Dòng 1 -->
-                            <tr class="hover:bg-gray-200"  th:each="sinhvien : ${sinhVienDTOList}">
-                                <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getMaSV()}"></td>
-                                <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getTenSV()}"></td>
-                                <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getUsername()}"></td>
-                                <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getGioiTinh()}"></td>
-                                <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getEmail()}"></td>
-                                <td class="py-4 px-6 border-b border-gray-200">
-                                    <button class="text-blue-500 hover:text-blue-700 mr-2" onclick="showDetailDiem(this)"  th:attr="data-Id=${sinhvien.getMaSV()}">Chi tiết điểm</button>
-                                </td>
-                            </tr>
+                        <tr class="hover:bg-gray-200"  th:each="sinhvien : ${sinhVienDTOList}">
+                            <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getMaSV()}"></td>
+                            <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getTenSV()}"></td>
+                            <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getUsername()}"></td>
+                            <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getGioiTinh()}"></td>
+                            <td class="py-4 px-6 border-b border-gray-200" th:text="${sinhvien.getEmail()}"></td>
+                            <td class="py-4 px-6 border-b border-gray-200">
+                                <button class="text-blue-500 hover:text-blue-700 mr-2" onclick="showDetailDiem(this)"  th:attr="data-Id=${sinhvien.getMaSV()}">Chi tiết điểm</button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
