@@ -290,16 +290,16 @@
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         alert("Xóa sinh viên thành công!");
-                        window.location.href = "sinhvien";
+                        window.location.reload();
                     } else {
                         alert("Đã xảy ra lỗi!");
-                        window.location.href = "sinhvien";
+                        window.location.reload();
                     }
                 }
             };
             xhr.send();
         } else {
-            window.location.href = "sinhvien";
+            window.location.reload();
             console.log("Hủy bỏ xóa sinh viên với mã: " + maSV);
         }
     }
@@ -325,8 +325,6 @@
         DiemDetailForm.hide(); // Ẩn form mà không cần reload trang
         window.location.reload(); // Load lại trang hiện tại
     }
-
-
 
 </script>
 </body>
