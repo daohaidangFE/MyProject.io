@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,15 +12,17 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString(exclude = {"role", "lop"})
 public class GiangVien {
     @Id
-    private Integer maGV;
+    private String maGV;
 
-    @Column(nullable = false)
     private String tenGV;
 
     @Column(nullable = false)
     private String username;
+
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private String password;
@@ -28,8 +31,14 @@ public class GiangVien {
     private String gioiTinh;
 
     @Column(nullable = false)
+    private String email;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "giangvien",fetch = FetchType.LAZY)
-    private List<MonHoc> monhoc;
+    @JsonIgnore
+    @OneToOne(mappedBy = "giangVien")
+    private Lop lop;
 }

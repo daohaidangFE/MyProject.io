@@ -15,14 +15,17 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString(exclude = {"diem", "lop"})
 public class SinhVien {
     @Id
-    private Integer maSV;
+    private String maSV;
 
     private String tenSV;
 
     @Column(nullable = false)
     private String username;
+
+    private boolean isActive = true;
 
     @Column(nullable = false)
     private String password;
@@ -31,8 +34,9 @@ public class SinhVien {
     private String gioiTinh;
 
     @Column(nullable = false)
-    private Role role;
+    private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sinhvien",fetch = FetchType.LAZY)
     private List<Diem> diem;
 

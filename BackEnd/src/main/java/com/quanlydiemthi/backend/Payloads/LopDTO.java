@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LopDTO {
 
-    private Integer maLop;
+    private String maLop;
 
     private String tenLop;
 

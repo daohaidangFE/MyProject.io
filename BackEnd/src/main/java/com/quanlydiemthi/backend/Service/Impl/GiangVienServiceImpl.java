@@ -7,12 +7,16 @@ import com.quanlydiemthi.backend.Repository.GiangVienRepository;
 import com.quanlydiemthi.backend.Service.IGiangVienService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class GiangVienServiceImpl implements IGiangVienService {
     @Autowired
     private GiangVienRepository giangVienRepository;
@@ -21,38 +25,61 @@ public class GiangVienServiceImpl implements IGiangVienService {
     public ModelMapper modelMapper;
 
     @Override
-    public List<GiangVienDTO> findAll() {
-        List<GiangVien> giangVien = giangVienRepository.findAll();
-        return giangVien.stream()
-                .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public GiangVienDTO findGiangVienById(Integer Id) {
-        GiangVien giangVien = giangVienRepository.findById(Id).orElseThrow(() -> new NotFoundException("GiangVien", "Id", Id));
-        return modelMapper.map(giangVien, GiangVienDTO.class);
-    }
-
-    @Override
-    public List<GiangVienDTO> searchByFullname(String tenGV) {
-        List<GiangVien> giangVien = giangVienRepository.findGiangVienByTenGVContainingIgnoreCase(tenGV);
-        return giangVien.stream()
-                .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<GiangVienDTO> searchByGioiTinh(String gioiTinh) {
-        List<GiangVien> giangVienList = giangVienRepository.findGiangVienByGioiTinhContainingIgnoreCase(gioiTinh);
+    public List<GiangVienDTO> findTeachers(Map<String, String> params) {
+        List<GiangVien> giangVienList = giangVienRepository.findTeachers(params);
         return giangVienList.stream()
                 .map((giangvien) -> this.modelMapper.map(giangvien, GiangVienDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteGiangVienById(Integer Id) {
-        giangVienRepository.deleteById(Id);
+    public void deleteTeacher(String maGV) {
+        GiangVien giangVien1 = giangVienRepository.findByMaGV(maGV.replaceAll("\\s+", "").trim());
+        giangVien1.setActive(false);
+        giangVienRepository.save(giangVien1);
+    }
+
+    @Override
+    public GiangVienDTO createTeacher(GiangVienDTO giangVienDTO) {
+        GiangVien giangVien = new GiangVien();
+        giangVien.setMaGV(giangVienDTO.getMaGV().replaceAll("\\s+", "").trim());
+        giangVien.setActive(true);
+        giangVien.setTenGV(giangVienDTO.getTenGV().replaceAll("\s\s+", " ").trim());
+        giangVien.setUsername(giangVienDTO.getUsername().replaceAll("\\s+", "").trim());
+        giangVien.setPassword(giangVienDTO.getPassword().replaceAll("\\s+", "").trim());
+        giangVien.setGioiTinh(giangVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        giangVien.setEmail(giangVienDTO.getEmail().replaceAll("\\s+", "").trim());
+        giangVienRepository.save(giangVien);
+        return this.modelMapper.map(giangVien, GiangVienDTO.class);
+    }
+
+    @Override
+    public GiangVien findTeacher(String maGV) {
+        return giangVienRepository.findByMaGV(maGV);
+    }
+
+    @Override
+    public GiangVien findByUserName(String userName) {
+        return giangVienRepository.findByMaGV(userName);
+    }
+
+    @Override
+    public void updateTeacher(GiangVienDTO giangVienDTO) {
+        GiangVien giangVien = giangVienRepository.findByMaGV(giangVienDTO.getMaGV());
+        giangVien.setTenGV(giangVienDTO.getTenGV().replaceAll("\s\s+", " ").trim());
+        giangVien.setGioiTinh(giangVienDTO.getGioiTinh().replaceAll("\s\s+", " ").trim());
+        giangVien.setUsername(giangVienDTO.getUsername().replaceAll("\\s+", "").trim());
+        giangVien.setEmail(giangVienDTO.getEmail().replaceAll("\\s+", "").trim());
+        giangVienRepository.save(giangVien);
+        this.modelMapper.map(giangVien, GiangVienDTO.class);
+    }
+
+    @Override
+    public void resetPassword(GiangVienDTO giangVienDTO) {
+        GiangVien giangVien = giangVienRepository.findByMaGV(giangVienDTO.getMaGV());
+        giangVien.setPassword(giangVienDTO.getNewPassword().replaceAll("\\s+", "").trim());
+        giangVienRepository.save(giangVien);
+        this.modelMapper.map(giangVien, GiangVienDTO.class);
     }
 }
 

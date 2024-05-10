@@ -1,5 +1,6 @@
 package com.quanlydiemthi.backend.Payloads;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.quanlydiemthi.backend.Entity.Diem;
 import com.quanlydiemthi.backend.Entity.Lop;
@@ -14,11 +15,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString(exclude = {"diem", "lop"})
 public class SinhVienDTO {
 
-    private Integer maSV;
+    private String maSV;
 
     private String tenSV;
+
+    private boolean isActive;
 
     private String username;
 
@@ -27,10 +32,16 @@ public class SinhVienDTO {
 
     private String gioiTinh;
 
+    private String email;
+
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Role role;
 
-    private List<Diem> diem;
+    private String tenLop;
 
     private Lop lop;
+
+    private String maLop;
+
+    private Diem diem;
 }

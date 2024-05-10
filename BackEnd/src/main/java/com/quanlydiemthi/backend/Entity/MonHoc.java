@@ -12,9 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class MonHoc {
     @Id
-    private Integer maMH;
+    private String maMH;
 
     @Column(nullable = false)
     private String tenMH;
@@ -22,10 +23,8 @@ public class MonHoc {
     @Column(nullable = false)
     private Integer soTinChi;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "monhoc",fetch = FetchType.LAZY)
         private List<Diem> diem;
 
-    @ManyToOne
-    @JoinColumn(name = "maGV")
-    private GiangVien giangvien;
 }
