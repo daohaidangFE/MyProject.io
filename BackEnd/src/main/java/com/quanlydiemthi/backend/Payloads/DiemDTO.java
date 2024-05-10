@@ -19,4 +19,9 @@ public class DiemDTO {
     private Float diemHe4;
     private String diemChu;
     private int soTinChi;
+    private Float diemGiuaKy;
+    private Float diemCuoiKy;
+    private String hocKy;
+    private String maMH;
+    private String maSV;
 }
