@@ -2,7 +2,6 @@ package com.quanlydiemthi.backend.Controller.admin;
 
 import com.quanlydiemthi.backend.Entity.GiangVien;
 import com.quanlydiemthi.backend.Payloads.GiangVienDTO;
-import com.quanlydiemthi.backend.Payloads.Response.ApiResponse;
 import com.quanlydiemthi.backend.Service.IGiangVienService;
 import com.quanlydiemthi.backend.Service.Impl.GiangVienServiceImpl;
 import jakarta.servlet.http.HttpSession;

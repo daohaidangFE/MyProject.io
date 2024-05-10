@@ -32,4 +32,3 @@ public class HomeController {
     public String forgotpassword(Model model) {return "/public/forgotpassword";}
 
 }
-

@@ -36,6 +36,7 @@ public class ApiGiangVien {
             return "error";
         }
     }
+
     @GetMapping("/giangvien/{maGV}")
     public ResponseEntity<GiangVien> getTeacherById(@PathVariable String maGV) {
         GiangVien giangVien = giangVienService.findTeacher(maGV);
@@ -43,6 +44,15 @@ public class ApiGiangVien {
             return ResponseEntity.ok(giangVien);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+    @PostMapping("/resetpassword/{maGV}")
+    public String resetPassword(@RequestBody GiangVienDTO giangVienDTO) {
+        try {
+            giangVienService.resetPassword(giangVienDTO);
+            return "success";
+        } catch (Exception e) {
+            return "error";
         }
     }
 }
